@@ -1,0 +1,136 @@
+{
+  "tahun_semasa": "2026",
+  "profil_korporat": {
+    "visi": "Menjadi agensi peneraju unggul dalam bidang meteorologi, iklim, gempa bumi dan tsunami.",
+    "misi": "Membekal perkhidmatan meteorologi, iklim, gempa bumi dan tsunami yang cekap dan berkesan untuk kesejahteraan, keselamatan dan pembangunan lestari selaras dengan keperluan Negara dan antarabangsa.",
+    "moto": "Rakan Cuaca dan Gempa Anda",
+    "slogan_q": "Komitmen 100% ke arah ketepatan ramalan 100%",
+    "teras_strategik": [
+      "Teras 1: Peningkatan ketepatan and kualiti data.",
+      "Teras 2: Pemacuan teknologi dan inovasi perkhidmatan.",
+      "Teras 3: Pemantapan sistem penyampaian perkhidmatan.",
+      "Teras 4: Pengukuhan tadbir urus cemerlang."
+    ]
+  },
+  "piagam_pelanggan": {
+    "maklum_balas_aduan": "Memberikan maklum balas penerimaan aduan dalam tempoh TIGA (3) hari bekerja.",
+    "pembekalan_data": "Membekalkan maklumat/data dalam tempoh LIMA (5) hari bekerja bagi permohonan yang lengkap.",
+    "ketersediaan_sistem": "Memastikan sistem penyampaian perkhidmatan Jabatan tersedia 24 jam sehari."
+  },
+  "direktori_pengurusan_dan_kakitangan_2026": {
+    "pejabat_ketua_pengarah": {
+      "ketua_pengarah": "DR. MOHD HISHAM B MOHD ANIP (hisham@met.gov.my, Sambungan: 8001)",
+      "setiausaha_pejabat": "Izlin Jasmani (izlin@met.gov.my, Sambungan: 8046)",
+      "pembantu_operasi": "Nordin Omblong (nordino@met.gov.my, Sambungan: 8049)"
+    },
+    "pejabat_timbalan_ketua_pengarah_operasi": {
+      "timbalan_kp": "AMBUN DINDANG (ambun@met.gov.my, Sambungan: 8002)",
+      "setiausaha_pejabat": "Jasliny Abdul Manan (jasliny@met.gov.my, Sambungan: 8048)"
+    },
+    "pejabat_timbalan_ketua_pengarah_strategik_teknikal": {
+      "timbalan_kp": "MOHD ZUNAIDI BIN MAT (zunaidi@met.gov.my, Sambungan: 8003)",
+      "setiausaha_pejabat": "Noor Aiin Hidayati Wahab (aiinhidayati@met.gov.my, Sambungan: 8047)"
+    },
+	"pegawai_urusan_pembelian_data": {
+      "sektor": "Sektor Perkhidmatan Klimatologi, Pusat Iklim Nasional",
+      "unit": "Unit Request (Permohonan Data) - Talian: 03-7967 8169",
+      "pegawai_1": "Puan Siti Rohana - Talian: 03-7967 8203",
+      "pegawai_2": "Puan Siti Norbaizura - Talian: 03-7967 8168",
+      "talian_umum": "Talian Am Jabatan: 03-79678000"
+    }
+  },
+  "kriteria_amaran_hujan_berterusan": {
+    "waspada_kuning": {
+      "kriteria": "Hujan berterusan dijangka berlaku dengan jumlah hujan yang kurang daripada 150 mm dalam tempoh 24 jam.",
+      "kesan": "Berkemungkinan menyebabkan banjir di kawasan berkedudukan rendah."
+    },
+    "buruk_jingga": {
+      "kriteria": "Hujan lebat berterusan dijangka berlaku dengan jumlah hujan melebihi 150 mm dalam tempoh 24 jam.",
+      "kesan": "Banjir di kawasan rendah/tebing sungai, serta kerosakan pada tanaman bermusim.",
+      "tindakan_jabatan": "Pemantauan rapi secara berterusan, pengeluaran amaran serta penyebaran kepada agensi, media massa, media sosial, myCuaca, eMET, SMS, faks dan emel."
+    },
+    "bahaya_merah": {
+      "kriteria": "Hujan sangat lebat berterusan dijangka berlaku dengan jumlah hujan melebihi 250 mm dalam tempoh 24 jam (24 jam dikira dari hujan bermula).",
+      "kesan": "Banjir yang lebih besar di kawasan rendah/tebing sungai, tanah runtuh di cerun bukit, kerosakan struktur tidak kukuh, jalan raya, jambatan, dan kemusnahan besar tanaman bermusim.",
+      "tindakan_jabatan": "Tindakan pemantauan dan penyebaran maklumat yang sama seperti peringkat Buruk."
+    }
+  },
+  "pencerapan_mendapan_asid": {
+    "metodologi": "Peta kecerunan pH dijana bulanan menggunakan kaedah interpolasi Inverse Distance Weighting (IDW) untuk melihat trend serantau pH, kepekatan sulfat dan nitrat (unit µmol/L).",
+    "klasifikasi_keasidan_air_hujan": {
+      "bersih": ">5.6",
+      "kurang_berasid": "5.2 - 5.6",
+      "sederhana": "4.8 - 5.2",
+      "berasid": "4.4 - 4.8",
+      "sangat_berasid": "< 4.4"
+    },
+    "definisi_hujan_asid": "Air hujan ditakrifkan sebagai 'Hujan Asid' apabila nilai pH adalah 4.4 dan ke bawah, sejajar dengan takrifan United States Environmental Protection Agencies (US EPA)."
+  },
+  "rekod_klimatologi_malaysia": {
+    "suhu": {
+      "tertinggi": "Rekod Ekstrem: 40.1°C di Chuping, Perlis (9/4/1998). Rekod 2025: 37.4°C di Sibu (29/7/2025).",
+      "terendah": "Rekod Ekstrem: 15.2°C di Keningau, Sabah (8/2/2017). Rekod 2025: 17.5°C di Keningau (25/9/2025).",
+      "tanah_tinggi_terendah": "Rekod Ekstrem: 10.0°C di Cameron Highlands (14/2/1989). Rekod 2025: 13°C di Cameron Highlands (30/1/2025)."
+    },
+    "hujan": {
+      "tertinggi_sejam": "Rekod Ekstrem: 164.6 mm di Perai, Pulau Pinang (14/8/2017). Rekod 2025: 94.8 mm di Miri, Sarawak (21/1/2025).",
+      "tertinggi_sehari_mid_to_mid": "Rekod Ekstrem: 698.7 mm di Kota Bharu, Kelantan (2/12/1981). Rekod 2025: 516 mm di Bintulu, Sarawak (29/1/2025).",
+      "bulanan_tertinggi": "Rekod Ekstrem: 1806.0 mm di Kuantan, Pahang (Disember 2014). Rekod 2025: 1408.8 mm di Bintulu, Sarawak (Januari 2025).",
+      "tahunan_tertinggi": "Rekod Ekstrem: 5978.2 mm di Mulu, Sarawak (2017). Rekod 2025: 4974.2 mm di Kuching, Sarawak.",
+      "hari_hujan_terbanyak": "Rekod Ekstrem: 289 hari di Kapit, Sarawak (2020). Rekod 2025: 273 hari di Kuching, Sarawak."
+    },
+    "kilat_dan_ribut_petir": {
+      "hari_kilat_tertinggi": "Rekod Ekstrem: 362 hari di Subang, Selangor (1987). Rekod 2025: 294 hari di Subang.",
+      "hari_ribut_petir_tertinggi": "Rekod Ekstrem: 297 hari di Subang, Selangor (1969). Rekod 2025: 143 hari di Bayan Lepas, Pulau Pinang."
+    }
+  },
+  "kamus_istilah_dan_pendidikan_meteorologi": {
+    "meteorologi": "Kajian tentang atmosfera dan fenomenanya, mencakupi keadaan fizikal, dinamik, kimia atmosfera bumi serta interaksi permukaan bumi.",
+    "kerpasan": "Cecair atau pepejal hasil pemeluwapan wap air yang jatuh dari awan sampai ke bumi (contoh: gerimis, hujan salji, hablur ais, hujan batu).",
+    "satelit_geopegun": "Satelit meteorologi/segerak di satah khatulistiwa pada altitud ~36,000 km yang mempunyai kelajuan sama dengan putaran bumi (24 jam).",
+    "olakan": "Gerakan dalaman teratur di lapisan udara yang menghasilkan pemindahan menegak unsur haba, momentum dan lembapan. Hujan olakan disebabkan oleh pergerakan olakan ini.",
+    "langkisau": "Pertambahan kelajuan angin serta-merta dalam selang masa pendek (biasanya kurang 20 saat), lebih pendek dari badai, diikuti keadaan reda."
+  },
+  "sains_bencana_dan_fenomena": {
+    "monsun_timur_laut": {
+      "deskripsi": "Musim hujan utama negara (November - Mac) hasil luruan udara sejuk Siberia yang berinteraksi dengan sistem tekanan rendah berhampiran khatulistiwa.",
+      "impak": "Membawa hujan lebat dan banjir besar di Pantai Timur Semenanjung (Kelantan, Terengganu, Pahang, Johor Timur), barat Sarawak dan timur Sabah.",
+      "persediaan_dan_tindakan": "Simpan bekalan air/makanan, bersihkan talang/parit, jauhi kawasan air laju/banjir, jangan memandu redah banjir, bersedia berpindah dan elakkan ke laut guna bot kecil."
+    },
+    "monsun_barat_daya": {
+      "deskripsi": "Berlaku Mei - September, secara relatifnya lebih kering bagi seluruh negara dengan hujan bulanan minimum (100-150mm).",
+      "impak_khusus": "Keadan kering di Semenanjung Malaysia disebabkan kesan lindung hujan oleh banjaran gunung di Sumatera. Negeri Sabah lebih lembap (>200mm) akibat kesan ekor taufan yang melintasi Filipina."
+    },
+    "garis_badai_sumatras": {
+      "deskripsi": "Barisan ribut petir panjang bergerak (menjelang subuh/awal pagi) terutamanya April - November semasa MBD di pantai barat Semenanjung dan pantai Malaysia Timur.",
+      "sains_kejadian": "Angin MBD merentasi banjaran gunung Sumatera menghasilkan gelombang gunung, bergabung dengan olakan udara panas Selat Melaka membentuk garis badai yang bergerak ke Timur Laut.",
+      "bahaya": "Menghasilkan langkisau, kilat, hujan lebat membawa banjir kilat, dan ricih angin menegak/ledakan menurun yang sangat berbahaya kepada pesawat penerbangan rendah/mendarat."
+    },
+    "el_nino_dan_la_nina": {
+      "el_nino": "Pemanasan suhu permukaan laut di Pasifik tengah dan timur setiap 2 ke 7 tahun (kekal 6-18 bulan). Menyebabkan tekanan atmosfera di barat Pasifik (Malaysia) meningkat, membawa cuaca luar biasa panas and kering.",
+      "la_nina": "Keadaan bertentangan (fasa sejuk ENSO) di mana suhu laut Pasifik tengah/timur lebih rendah dari biasa, menurunkan tekanan atmosfera di Pasifik barat lalu membawa awan aktif and hujan lebat.",
+      "pengukuran_indeks": "Menggunakan Southern Oscillation Index (SOI) berdasarkan perbezaan tekanan Tahiti dan Darwin (nilai negatif = El Niño, nilai positif = La Niña) dan Oceanic Niño Index (ONI) di rantau Niño 3.4 (ambang +/-0.5°C)."
+    },
+    "siklon_tropika_taufan": {
+      "deskripsi": "Ribut ganas berputar berdiameter ratusan kilometer bermula di perairan laut hangat (min 26.5°C, kedalaman >50m) pada jarak minimum 500 km dari Khatulistiwa.",
+      "perbezaan_nama": "Dinamakan 'Hurikan' di Atlantik/Timur Laut Pasifik, 'Taufan' di Barat Laut Pasifik (cth: Asia, bermula Mei-September), dan 'Siklon' di Selatan Pasifik/Lautan Hindi.",
+      "pengelasan": "Lekukan Tropik (angin <=61 kmsj), Ribut Tropika (62-117 kmsj), dan Taufan (>=118 kmsj). Pusat tekanan rendah dipanggil mata taufan (30-100 km) dikelilingi dinding mata yang ganas.",
+      "ancaman": "Luruan ribut (kubah air besar 50-100 batu melanda pantai), hujan lebat penyebab banjir, dan angin kencang/langkisau pemusnah struktur."
+    },
+    "skala_intensiti_tornado_fujita_dipertingkatkan_ef": {
+      "deskripsi": "Skala intensiti tornado berdasarkan potensi kerosakan yang digunapakai sejak Februari 2007 (rekod Malaysia: Kedah, Okt-Nov 2014).",
+      "kategori": {
+        "EF0": "105-137 km/j. Minor/Tiada kerosakan. Atap terkupas, dahan patah.",
+        "EF1": "138-177 km/j. Kerosakan Sederhana. Bumbung ketara, tingkap pecah, rumah mudah alih terbalik.",
+        "EF2": "178-217 km/j. Kerosakan agak besar. Bumbung terkopak, rumah mudah alih musnah, pokok tercabut, kereta terpelanting.",
+        "EF3": "218-266 km/j. Kerosakan Teruk. Rumah baik musnah, bangunan besar rosak ketara, kulit kayu tertanggal.",
+        "EF4": "267-322 km/j. Kerosakan Melampau. Rumah diratakan, kereta diterbangkan jauh, dinding batu tingkat atas runtuh.",
+        "EF5": ">322 km/j. Kerosakan Luar Biasa. Rumah baik diterbangkan, konkrit bertulang rosak kritikal, bangunan tinggi rosak teruk."
+      }
+    }
+  },
+  "pembelian_data_mymetdata": {
+    "cara_beli": "Pengguna boleh membeli atau memohon data meteorologi/hujan secara dalam talian melalui Portal MyMETData di pautan rasmi <a href=\"https://mymetdata.met.gov.my\" target=\"_blank\" class=\"chat-link\">mymetdata.met.gov.my</a>.",
+    "how_to_buy": "Users can purchase or request meteorological/rainfall data online via the official MyMETData Portal link at <a href=\"https://mymetdata.met.gov.my\" target=\"_blank\" class=\"chat-link\">mymetdata.met.gov.my</a>."
+  }
+}

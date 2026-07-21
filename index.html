@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <title>Website Rasmi Jabatan</title>
+	
+    <!-- Leaflet CSS & JS untuk Peta -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="header-logos">
+            <img src="images/jata.png" alt="Jata Negara">
+            <img src="images/met.png" alt="Logo MET Malaysia">
+        </div>
+        
+        <div class="header-text">
+            <p>LAMAN WEB RASMI</p>
+            <h1>JABATAN METEOROLOGI MALAYSIA</h1>
+            <p>KEMENTERIAN SUMBER ASLI DAN KELESTARIAN ALAM</p>
+        </div>
+    </div>
+</header>
+
+<main class="content">
+    <div class="container">
+        <h2>Selamat Datang</h2>
+        <p>Projek KIK 2026 : AI Chatbox bagi Automasi Perkhidmatan Pelanggan.</p>
+        <p>
+            Ini adalah laman web rasmi Jabatan Meteorologi Malaysia.
+            Pengguna boleh mendapatkan bantuan melalui chatbox AI.
+        </p>
+    </div>
+</main>
+
+<div id="chat-button" onclick="toggleChat()">
+    <img src="images/avatar.jpeg" alt="Chatbot">
+</div>
+
+<div id="chatbox">
+
+    <div class="chat-header">
+        <span>Hi, Ask A.I.D.A.</span>
+		
+        <div>
+            <!-- 📥 Butang eksport log perbualan (Audit Trail) dimasukkan di sini -->
+            <button onclick="exportChatLog()" title="Download Chat Log">📥</button>
+            <button onclick="resetChat()" title="Reset Chat">↻</button>
+            <button onclick="toggleChat()">✕</button>
+        </div>
+    </div>
+    
+    <div class="chat-messages" id="chatMessages"></div>
+	
+    <div id="quickReplies" class="quick-replies"></div>
+    
+    <div class="chat-input">
+        <div id="inputSuggestions" class="input-suggestions"></div>
+
+        <input type="text" id="userInput" placeholder="Taip mesej...">
+
+        <button onclick="sendMessage()">Hantar</button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

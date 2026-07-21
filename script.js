@@ -395,7 +395,8 @@ async function botReply(userMessage) {
         // 💡 Padam sebarang jangka masa lama jika ada soalan baru masuk bertubi-tubi
         clearTimeout(followUpTimeout);
 
-        const response = await fetch("http://localhost:3000/chat", {
+        // 🚀 URL BACKEND DISAMBUNGKAN TERUS KE SERVER RENDER!
+        const response = await fetch("https://aida-met-kik.onrender.com/chat", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

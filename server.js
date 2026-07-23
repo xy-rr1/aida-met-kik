@@ -25,10 +25,10 @@ const faqData = [
         answerEN: 'To use this website, please refer to the main menu at the top of the page.'
     },
     {
-        keywords: ['waktu operasi', 'waktu pejabat', 'pejabat buka', 'operating hours', 'office hours'],
-        answerBM: 'Waktu operasi kami adalah Isnin hingga Jumaat, 8.00 pagi hingga 5.00 petang.',
-        answerEN: 'Our operating hours are Monday to Friday, 8.00 AM to 5.00 PM.'
-    },
+		keywords: ['waktu operasi', 'waktu pejabat', 'pejabat buka', 'operating hours', 'office hours', 'jam berapa buka', 'waktu kaunter'],
+		answerBM: 'Waktu operasi kaunter MET Malaysia adalah seperti berikut:<br><br><b>Isnin - Khamis:</b><br>• 8:00 pagi - 1:00 petang<br>• 2:00 petang - 4:00 petang<br><br><b>Jumaat:</b><br>• 8:00 pagi - 12:00 tengah hari<br>• 3:00 petang - 4:00 petang<br><br><i>*Tutup pada hari Sabtu, Ahad & Cuti Umum.</i>',
+		answerEN: 'MET Malaysia counter operating hours are as follows:<br><br><b>Monday - Thursday:</b><br>• 8:00 AM - 1:00 PM<br>• 2:00 PM - 4:00 PM<br><br><b>Friday:</b><br>• 8:00 AM - 12:00 PM<br>• 3:00 PM - 4:00 PM<br><br><i>*Closed on Saturdays, Sundays & Public Holidays.</i>'
+	},
     {
         keywords: ['alamat jabatan', 'lokasi jabatan', 'di mana met', 'alamat met', 'jalan sultan', 'department address', 'met location', 'alamat pejabat', 'lokasi pejabat', 'alamat', 'lokasi'],
         answerBM: 'Jabatan Meteorologi Malaysia, Jalan Sultan, 46667 Petaling Jaya, Selangor Darul Ehsan.',
@@ -41,8 +41,8 @@ const faqData = [
     },
     {
         keywords: ['urusan bayar', 'transaksi pembayaran', 'pending for payment', 'maybank2u', 'cimb clicks', 'payment transactions', 'payment'],
-        answerBM: 'Bayaran boleh dibuat melalui maybank2u dan cimb clicks selepas status bertukar "pending for payment".',
-        answerEN: 'Payment can be made through maybank2u and cimb clicks after the status changes to "pending for payment".'
+        answerBM: 'Bayaran boleh dibuat melalui maybank2u, bank draf atau wang pos.',
+        answerEN: 'Payment can be made via Maybank2u, bank draft, or postal order.'
     },
     {
         keywords: ['walk-in', 'hadir kaunter', 'pergi kaunter', 'kaunter tingkat 3', 'counter services', 'walk-in / counter services'],
@@ -81,7 +81,7 @@ const faqData = [
     },
     {
         keywords: ['pegawai dihubungi', 'hubungi pegawai', 'nama pegawai', 'nombor telefon pegawai', 'contact person', 'officer in charge', 'siapa hubungi', 'hubungi', 'telefon', 'nombor'],
-        answerBM: 'Untuk urusan permohonan dan pembelian data, sila hubungi <b>Unit Request, Sektor Perkhidmatan Klimatologi</b> melalui talian berikut:<br><br>📞 <b>Unit Request (Permohonan Data):</b> 03-7967 8169<br><br>👤 <b>Puan Siti Rohana:</b> 03-7967 8203<br>👤 <b>Puan Siti Norbaizura:</b> 03-7967 8168<br><br>☎️ Talian Am Jabatan: 03-7967 8000',
+        answerBM: 'Untuk urusan permohonan dan pembelian data, sila hubungi <b>Unit Pembekalan Data, Sektor Perkhidmatan Klimatologi</b> melalui talian berikut:<br><br>📞 <b>Unit Request (Permohonan Data):</b> 03-7967 8169<br><br>👤 <b>Puan Siti Rohana:</b> 03-7967 8203<br>👤 <b>Puan Siti Norbaizura:</b> 03-7967 8168<br><br>☎️ Talian Am Jabatan: 03-7967 8000',
         answerEN: 'For data applications and purchases, please contact the <b>Request Unit, Climatological Services Sector</b> via the following lines:<br><br>📞 <b>Request Unit (Data Application):</b> 03-7967 8169<br><br>👤 <b>Puan Siti Rohana:</b> 03-7967 8203<br>👤 <b>Puan Siti Norbaizura:</b> 03-7967 8168<br><br>☎️ Department General Line: 03-7967 8000'
     }
 ];

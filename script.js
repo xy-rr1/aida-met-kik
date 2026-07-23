@@ -278,7 +278,7 @@ function setLanguage(lang, event) {
     if (currentLang === 'BM') {
         addMessage('Bahasa Malaysia', 'user');
         setTimeout(() => {
-            addMessage('Sembang ini dikawal oleh Terma dan Syarat Chatbot AI MET Malaysia, yang memastikan interaksi anda safe dan dilindungi selaras dengan undang-undang. Sebelum meneruskan sembang, sila baca Terma dan Syarat dengan teliti.', 'bot');
+            addMessage('Sembang ini dikawal oleh Terma dan Syarat Chatbot AI MET Malaysia, yang memastikan interaksi anda selamat dan dilindungi selaras dengan undang-undang. Sebelum meneruskan sembang, sila baca Terma dan Syarat dengan teliti.', 'bot');
             showTermsOptions(); 
         }, 600);
     } else {

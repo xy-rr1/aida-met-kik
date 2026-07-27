@@ -92,7 +92,7 @@ function sendMessage() {
         chatStage = 'COMPLETED';
         setTimeout(() => {
             const responsSelesai = currentLang === 'BM'
-                ? `Pendaftaran profil anda berjaya direkodkan! ✅\n\nSila pilih soalan FAQ di bawah atau kemukakan apa-apa pertanyaan untuk pembantu AI AIDA.`
+                ? `Pendaftaran profil anda berjaya direkodkan! ✅\n\nSila pilih soalan FAQ di bawah atau kemukakan pertanyaan kepada pembantu AI AIDA.`
                 : `Profile registration successful! ✅\n\nPlease select any FAQ question below or type your inquiry for AI assistant AIDA.`;
             addMessage(responsSelesai, 'bot');
             
@@ -278,7 +278,7 @@ function setLanguage(lang, event) {
     if (currentLang === 'BM') {
         addMessage('Bahasa Malaysia', 'user');
         setTimeout(() => {
-            addMessage('Sembang ini dikawal oleh Terma dan Syarat Chatbot AI MET Malaysia, yang memastikan interaksi anda selamat dan dilindungi selaras dengan undang-undang. Sebelum meneruskan sembang, sila baca Terma dan Syarat dengan teliti.', 'bot');
+            addMessage('Perbualan ini dikawal oleh Terma dan Syarat Chatbot AI MET Malaysia, yang memastikan interaksi anda selamat dan dilindungi selaras dengan undang-undang. Sebelum meneruskan perbualan, sila baca Terma dan Syarat dengan teliti.', 'bot');
             showTermsOptions(); 
         }, 600);
     } else {
@@ -352,7 +352,7 @@ function showFaqOptions(lang) {
             <button class="lang-btn" onclick="quickAsk('Pengecualian yuran & Diskaun pelajar', event)">Pengecualian Fi Pelajar</button>
             <button class="lang-btn" onclick="quickAsk('Prosedur & Dokumen sokongan', event)">Prosedur & Dokumen</button>
             <button class="lang-btn" onclick="quickAsk('Tempoh proses data', event)">Tempoh Proses Data</button>
-            <button class="lang-btn" onclick="quickAsk('Pegawai dihubungi', event)">📞 Hubungi Pegawai</button>
+            <button class="lang-btn" onclick="quickAsk('Pegawai bertugas', event)">📞 Hubungi Pegawai</button>
         `;
     } else {
         div.innerHTML = `
@@ -367,7 +367,7 @@ function showFaqOptions(lang) {
             <button class="lang-btn" onclick="quickAsk('Fee waivers & Student discount', event)">Student Fee Waiver</button>
             <button class="lang-btn" onclick="quickAsk('Procedures & Required documents', event)">Documents Required</button>
             <button class="lang-btn" onclick="quickAsk('Data processing period', event)">Data processing period</button>
-            <button class="lang-btn" onclick="quickAsk('Contact person', event)">📞 Contact Officer</button>
+            <button class="lang-btn" onclick="quickAsk('Officer in charge', event)">📞 Contact Officer</button>
         `;
     }    
     
@@ -412,11 +412,27 @@ async function botReply(userMessage) {
 
         addMessage(reply, 'bot');
 
-        // 💡 Masukkan pembilang masa responsif (3 saat)
+        // 💡 Masukkan pembilang masa responsif (3 saat) dengan VARIASI AYAT RAWAK
         followUpTimeout = setTimeout(() => {
-            const sambunganMesej = currentLang === 'BM' 
-                ? 'Ada apa-apa lagi soalan yang ingin anda tanyakan?' 
-                : 'Is there anything else I can help you with?';
+            const listAyatBM = [
+                'Ada apa-apa lagi maklumat yang boleh saya bantu anda?',
+                'Ada sebarang soalan lain berkenaan perkhidmatan MET Malaysia?',
+                'Bagaimana lagi saya boleh bantu anda hari ini?',
+                'Sila beritahu jika anda memerlukan penjelasan lanjut.'
+            ];
+            
+            const listAyatEN = [
+                'Is there anything else I can help you with?',
+                'Do you have any other inquiries regarding MET Malaysia services?',
+                'How else may I assist you today?',
+                'Feel free to ask if you need further clarification.'
+            ];
+
+            const randomBM = listAyatBM[Math.floor(Math.random() * listAyatBM.length)];
+            const randomEN = listAyatEN[Math.floor(Math.random() * listAyatEN.length)];
+
+            const sambunganMesej = currentLang === 'BM' ? randomBM : randomEN;
+            
             addMessage(sambunganMesej, 'bot');
             showFaqOptions(currentLang); 
         }, 3000);
@@ -505,19 +521,49 @@ document.addEventListener('click', function(e) {
 });
 
 // ================================================================
-// 5. FUNGSI EKSPORT LOG PERBUALAN (CIRI AUDIT TRAIL KIK)
+// 5. FUNGSI EKSPORT LOG PERBUALAN (CIRI AUDIT TRAIL KIK DENGAN PASSWORD)
 // ================================================================
 function exportChatLog() {
-    const logs = JSON.parse(localStorage.getItem('chatLogs'));
-    
-    if (!logs || logs.length === 0) {
-        alert(currentLang === 'BM' ? 'Tiada rekod sembang untuk diekstrak.' : 'No chat records to extract.');
+    // 🔐 Kata laluan khas pegawai untuk muat turun log
+    const ADMIN_PASSWORD = "fadilensem678"; 
+
+    // 1. Minta pengesahan kata laluan daripada pengguna
+    const userPrompt = prompt(
+        currentLang === 'BM' 
+            ? "Sila masukkan kata laluan:" 
+            : "Please enter password:"
+    );
+
+    // 2. Jika pengguna tekan 'Cancel' atau tidak taip apa-apa
+    if (userPrompt === null || userPrompt.trim() === "") {
+        alert(currentLang === 'BM' ? "Akses dibatalkan." : "Access cancelled.");
         return;
     }
 
+    // 3. Semak jika kata laluan salah
+    if (userPrompt !== ADMIN_PASSWORD) {
+        alert(
+            currentLang === 'BM' 
+                ? "⚠️ Kata laluan salah." 
+                : "⚠️ Incorrect password."
+        );
+        return;
+    }
+
+    // 4. Semak jika ada log tersimpan
+    const logs = JSON.parse(localStorage.getItem('chatLogs'));
+    if (!logs || logs.length === 0) {
+        alert(currentLang === 'BM' ? 'Tiada rekod perbualan untuk diekstrak.' : 'No chat records to extract.');
+        return;
+    }
+
+    // 5. Jika kata laluan BETUL, teruskan eksport log perbualan
     let textContent = "==================================================\n";
     textContent += "    AIDA MET MALAYSIA - CHATBOX AUDIT TRAIL LOG   \n";
     textContent += `    Tarikh Eksport: ${new Date().toLocaleString()} \n`;
+    if (userData.name) {
+        textContent += `    Profil Pengguna : ${userData.name} | ${userData.phone} | ${userData.email}\n`;
+    }
     textContent += "==================================================\n\n";
 
     logs.forEach((log, index) => {
@@ -539,4 +585,6 @@ function exportChatLog() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+    alert(currentLang === 'BM' ? "✅ Kata laluan disahkan. Muat turun log perbualan berjaya!" : "✅ Password verified. Chat log downloaded successfully!");
 }

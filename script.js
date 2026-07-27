@@ -525,7 +525,7 @@ document.addEventListener('click', function(e) {
 // ================================================================
 function exportChatLog() {
     // 🔐 Kata laluan khas pegawai untuk muat turun log
-    const ADMIN_PASSWORD = "fadilensem678"; 
+    const ADMIN_PASSWORD = "bukanuser678"; 
 
     // 1. Minta pengesahan kata laluan daripada pengguna
     const userPrompt = prompt(

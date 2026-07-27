@@ -99,7 +99,10 @@ body {
 /* Bagi content tak terlalu melebar dan nampak lebih kemas */
 .container {
     max-width: 1100px;      /* Lebar maksimum */
-    margin: 40px auto;      /* Tengah secara automatik */
+	margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: 190px;          /* 👈 JARAK DARI KIRI (Selari dengan teks JABATAN) */
+    margin-right: auto;          /* Supaya tidak ditarik ke tengah */
     padding: 30px;
     background-color: #ffffff;
     border-radius: 10px;

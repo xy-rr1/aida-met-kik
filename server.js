@@ -80,7 +80,7 @@ const faqData = [
         answerEN: 'Data and information will be processed and provided within FIVE (5) working days upon receipt of a complete application.'
     },
     {
-        keywords: ['pegawai dihubungi', 'hubungi pegawai', 'nama pegawai', 'nombor telefon pegawai', 'contact person', 'officer in charge', 'siapa hubungi', 'hubungi', 'telefon', 'nombor'],
+        keywords: ['pegawai dihubungi','pegawai bertugas', 'hubungi pegawai', 'nama pegawai', 'nombor telefon pegawai', 'contact person', 'officer in charge', 'siapa hubungi', 'hubungi', 'telefon', 'nombor'],
         answerBM: 'Untuk urusan permohonan dan pembelian data, sila hubungi <b>Unit Pembekalan Data, Sektor Perkhidmatan Klimatologi</b> melalui talian berikut:<br><br>📞 <b>Unit Request (Permohonan Data):</b> 03-7967 8169<br><br>👤 <b>Puan Siti Rohana:</b> 03-7967 8203<br>👤 <b>Puan Siti Norbaizura:</b> 03-7967 8168<br><br>☎️ Talian Am Jabatan: 03-7967 8000',
         answerEN: 'For data applications and purchases, please contact the <b>Request Unit, Climatological Services Sector</b> via the following lines:<br><br>📞 <b>Request Unit (Data Application):</b> 03-7967 8169<br><br>👤 <b>Puan Siti Rohana:</b> 03-7967 8203<br>👤 <b>Puan Siti Norbaizura:</b> 03-7967 8168<br><br>☎️ Department General Line: 03-7967 8000'
     }

@@ -13,6 +13,246 @@ let userData = {
     email: ''
 };
 
+// 📍 SENARAI STESEN AUKISILIARI (249 STESEN DARI EXCEL)
+const auxiliaryStations = [
+    { "name": "Stesen Auksiliari RPS Kuala Betis", "lat": 4.9006, "lng": 101.7851 },
+    { "name": "Stesen Auksiliari KESEDAR Lebir", "lat": 5.0123, "lng": 102.3812 },
+    { "name": "Stesen Auksiliari FELDA Chiku 3", "lat": 4.9716, "lng": 102.2000 },
+    { "name": "Stesen Auksiliari Masjid Besar Jeli", "lat": 5.6948, "lng": 101.8468 },
+    { "name": "Stesen Auksiliari MARDI Jeram Pasu", "lat": 5.8129, "lng": 102.3444 },
+    { "name": "Stesen Auksiliari Pertubuhan Peladang G Stong", "lat": 5.3762, "lng": 102.0113 },
+    { "name": "Stesen Auksiliari Pej. Haiwan Jajahan Machang", "lat": 5.7691, "lng": 102.2165 },
+    { "name": "Stesen Auksiliari Pst. Pertanian Batang Merbau", "lat": 5.8103, "lng": 102.0194 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Melor", "lat": 5.9669, "lng": 102.3003 },
+    { "name": "Stesen Auksiliari Pejabat Kastam Pengkalan Kubor", "lat": 6.2331, "lng": 102.0962 },
+    { "name": "Stesen Auksiliari Loji Air Telong", "lat": 5.9734, "lng": 102.4304 },
+    { "name": "Stesen Auksiliari MARDI Pasir Puteh", "lat": 5.8364, "lng": 102.3905 },
+    { "name": "Stesen Auksiliari Pej. Pertanian Tanah Merah", "lat": 5.8126, "lng": 102.1528 },
+    { "name": "Stesen Auksiliari MARDI Bachok", "lat": 6.0628, "lng": 102.4093 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Tumpat", "lat": 6.1953, "lng": 102.1673 },
+    { "name": "Stesen Auksiliari Kompleks Vokasional Pasir Mas", "lat": 6.0147, "lng": 102.1121 },
+    { "name": "Stesen Auksiliari Hospital Jeli", "lat": 5.6980, "lng": 101.8436 },
+    { "name": "Stesen Auksiliari Klinik Desa Meranti", "lat": 6.0697, "lng": 102.2081 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Lundang", "lat": 6.1042, "lng": 102.2592 },
+    { "name": "Stesen Auksiliari Hospital Gua Musang", "lat": 4.8811, "lng": 101.9622 },
+    { "name": "Stesen Auksiliari Kompleks Pertanian Tunjuk Laut", "lat": 1.7766, "lng": 104.0326 },
+    { "name": "Stesen Auksiliari MARDI Kluang", "lat": 2.0163, "lng": 103.3242 },
+    { "name": "Stesen Auksiliari Pusat Latihan Pertanian Air Hitam", "lat": 1.9320, "lng": 103.1764 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Bekok", "lat": 2.3023, "lng": 103.1293 },
+    { "name": "Stesen Auksiliari Pejabat Jabatan Kerja Raya Labis", "lat": 2.3831, "lng": 103.0201 },
+    { "name": "Stesen Auksiliari Jabatan Pertanian Pagoh", "lat": 2.1481, "lng": 102.7712 },
+    { "name": "Stesen Auksiliari Jabatan Pertanian Parit Botak", "lat": 1.7028, "lng": 103.1192 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Parit Sulong", "lat": 1.9723, "lng": 102.8833 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Sagil", "lat": 2.3167, "lng": 102.6167 },
+    { "name": "Stesen Auksiliari Kolej Komuniti Segamat 2", "lat": 2.5083, "lng": 102.8139 },
+    { "name": "Stesen Auksiliari Loji Air Sungai Layang", "lat": 1.5039, "lng": 103.9511 },
+    { "name": "Stesen Auksiliari Loji Air Sultan Iskandar", "lat": 1.5542, "lng": 103.8839 },
+    { "name": "Stesen Auksiliari Klinik Desa Sungai Tiram", "lat": 1.5976, "lng": 103.8967 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Tangkak", "lat": 2.2686, "lng": 102.5401 },
+    { "name": "Stesen Auksiliari Pejabat Ladang Telok Sengat", "lat": 1.5647, "lng": 104.0294 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Sungai Buntu", "lat": 1.3094, "lng": 103.5042 },
+    { "name": "Stesen Auksiliari SMK Bandar Putra", "lat": 1.6667, "lng": 103.6231 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Renggam", "lat": 1.8842, "lng": 103.4020 },
+    { "name": "Stesen Auksiliari SM Teknik Johor Bahru", "lat": 1.5033, "lng": 103.7431 },
+    { "name": "Stesen Auksiliari SK FELDA Inas", "lat": 1.8344, "lng": 103.5350 },
+    { "name": "Stesen Auksiliari SMK Tengku Temenggung Ahmad", "lat": 2.1228, "lng": 102.5694 },
+    { "name": "Stesen Auksiliari SK Bukit Rahmat", "lat": 2.1389, "lng": 102.6500 },
+    { "name": "Stesen Auksiliari SK Seri Jitu", "lat": 2.0583, "lng": 102.8639 },
+    { "name": "Stesen Auksiliari SK Sungai Boh", "lat": 1.3286, "lng": 103.5283 },
+    { "name": "Stesen Auksiliari Hospital Pontian", "lat": 1.4886, "lng": 103.3906 },
+    { "name": "Stesen Auksiliari Kompleks Penghulu Mukim Jelutong", "lat": 1.5794, "lng": 103.4475 },
+    { "name": "Stesen Auksiliari SK LKTP Tenggaroh 2", "lat": 2.1006, "lng": 103.9264 },
+    { "name": "Stesen Auksiliari Kolej Vokasional Kota Tinggi", "lat": 1.7289, "lng": 103.8825 },
+    { "name": "Stesen Auksiliari SK Seri Pulai", "lat": 1.8322, "lng": 103.0231 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Batu Pahai", "lat": 1.8586, "lng": 102.9367 },
+    { "name": "Stesen Auksiliari SK Seri Kampung Renggam", "lat": 1.8797, "lng": 103.1814 },
+    { "name": "Stesen Auksiliari SK FELDA Pengeli Timur", "lat": 1.8653, "lng": 103.6267 },
+    { "name": "Stesen Auksiliari Pejabat Penghulu Mukim Sedili Besar", "lat": 1.9214, "lng": 104.1081 },
+    { "name": "Stesen Auksiliari SK FELDA Lok Heng", "lat": 1.8153, "lng": 103.9856 },
+    { "name": "Stesen Auksiliari SK Kota Raja", "lat": 2.1869, "lng": 102.8308 },
+    { "name": "Stesen Auksiliari SK Bandar Endau", "lat": 2.6517, "lng": 103.6200 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Cahaya Bahru", "lat": 1.5056, "lng": 103.9431 },
+    { "name": "Stesen Auksiliari MRSM Mersing", "lat": 2.4183, "lng": 103.8394 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Ayer Manis", "lat": 1.6378, "lng": 103.5239 },
+    { "name": "Stesen Auksiliari Kolej Komuniti Bandar Penawar", "lat": 1.5583, "lng": 104.2306 },
+    { "name": "Stesen Auksiliari Stesen MARDI Seberang Perai", "lat": 5.5392, "lng": 100.4631 },
+    { "name": "Stesen Auksiliari Stesen MARDI Teluk Chengai", "lat": 6.1022, "lng": 100.3325 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Charok Padang", "lat": 5.7950, "lng": 100.8122 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Gajah Mati", "lat": 6.1839, "lng": 100.4358 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Pendang", "lat": 5.9903, "lng": 100.4789 },
+    { "name": "Stesen Auksiliari Jabatan Pertanian Bukit Tangga", "lat": 6.4258, "lng": 100.4289 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Kulim", "lat": 5.3708, "lng": 100.5517 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Serdang", "lat": 5.2106, "lng": 100.6128 },
+    { "name": "Stesen Auksiliari Sek. Men. Sains Kubang Pasu", "lat": 6.4211, "lng": 100.3686 },
+    { "name": "Stesen Auksiliari Sek. Keb. Pulau Tuba", "lat": 6.2417, "lng": 99.8406 },
+    { "name": "Stesen Auksiliari Kompleks KEDA Kampung Bukit", "lat": 6.0683, "lng": 100.7225 },
+    { "name": "Stesen Auksiliari SK FELDA Guan San", "lat": 6.4381, "lng": 100.4900 },
+    { "name": "Stesen Auksiliari Sek. Keb. Padang Sanai", "lat": 6.3686, "lng": 100.7061 },
+    { "name": "Stesen Auksiliari Loji Rawatan Air Lubuk Bunter", "lat": 5.2014, "lng": 100.6728 },
+    { "name": "Stesen Auksiliari Sek. Men. Keb. Sik", "lat": 5.8203, "lng": 100.7486 },
+    { "name": "Stesen Auksiliari Sek. Keb. Pedu", "lat": 6.2575, "lng": 100.7481 },
+    { "name": "Stesen Auksiliari Kolej Vokasional Sungai Petani 2", "lat": 5.6703, "lng": 100.5283 },
+    { "name": "Stesen Auksiliari Sek. Keb. Guar Lobak", "lat": 5.4678, "lng": 100.5622 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Batu Lanchang", "lat": 5.3942, "lng": 100.3061 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Bukit Temiang", "lat": 6.5408, "lng": 100.2481 },
+    { "name": "Stesen Auksiliari SM Teknik Tuanku Jaafar", "lat": 2.7300, "lng": 101.9547 },
+    { "name": "Stesen Auksiliari Pusat Latihan Pertanian Kampong Gelami", "lat": 3.0136, "lng": 102.0406 },
+    { "name": "Stesen Auksiliari SMK Batu Kikir", "lat": 2.8311, "lng": 102.3161 },
+    { "name": "Stesen Auksiliari Jabatan Pertanian Rembau", "lat": 2.5936, "lng": 102.0911 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Gemas", "lat": 2.5833, "lng": 102.6108 },
+    { "name": "Stesen Auksiliari SM Sains Tuanku Munawir", "lat": 2.7067, "lng": 101.9867 },
+    { "name": "Stesen Auksiliari SMK Serting Hilir Complex", "lat": 2.9150, "lng": 102.4339 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Lukut", "lat": 2.5636, "lng": 101.8319 },
+    { "name": "Stesen Auksiliari Pejabat Jabatan Kerja Raya Tampin", "lat": 2.4764, "lng": 102.2286 },
+    { "name": "Stesen Auksiliari Loji Rawatan Air Pantai", "lat": 2.7844, "lng": 101.9897 },
+    { "name": "Stesen Auksiliari SMK Pasir Panjang", "lat": 2.4228, "lng": 101.9333 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Chembong", "lat": 2.5622, "lng": 102.0808 },
+    { "name": "Stesen Auksiliari Pusat Latihan Pertanian Seram", "lat": 2.8711, "lng": 102.0231 },
+    { "name": "Stesen Auksiliari SK Keru", "lat": 2.4939, "lng": 102.2908 },
+    { "name": "Stesen Auksiliari SMK Linggi", "lat": 2.4889, "lng": 102.0000 },
+    { "name": "Stesen Auksiliari SMK Felda Palong 7", "lat": 2.7303, "lng": 102.5861 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Sungai Udang", "lat": 2.2925, "lng": 102.1389 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Selandar", "lat": 2.3872, "lng": 102.3789 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Pulau Gadong", "lat": 2.2283, "lng": 102.2047 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Merlimau", "lat": 2.1444, "lng": 102.4289 },
+    { "name": "Stesen Auksiliari SM Teknik Melaka Tengah", "lat": 2.2475, "lng": 102.2611 },
+    { "name": "Stesen Auksiliari Sek. Keb. Alor Gajah 1", "lat": 2.3800, "lng": 102.2094 },
+    { "name": "Stesen Auksiliari Sek. Keb. Simpang Empat", "lat": 2.4283, "lng": 102.1831 },
+    { "name": "Stesen Auksiliari Loji Air Gadek", "lat": 2.4089, "lng": 102.2486 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Kuala Linggi", "lat": 2.3886, "lng": 102.0169 },
+    { "name": "Stesen Auksiliari Sek. Men. Keb. Seri Bemban", "lat": 2.2603, "lng": 102.3769 },
+    { "name": "Stesen Auksiliari Loji Air Chin Chin", "lat": 2.3025, "lng": 102.4914 },
+    { "name": "Stesen Auksiliari Loji Air Merlimau", "lat": 2.1469, "lng": 102.4244 },
+    { "name": "Stesen Auksiliari Sek. Keb. Kem Terendak 1", "lat": 2.2858, "lng": 102.1067 },
+    { "name": "Stesen Auksiliari Kolej Vokasional Datuk Seri Mohd Zin", "lat": 2.3928, "lng": 102.1969 },
+    { "name": "Stesen Auksiliari Stesen MARDI Kuala Linggi", "lat": 2.3822, "lng": 102.0169 },
+    { "name": "Stesen Auksiliari Sek. Keb. Nyalas", "lat": 2.4339, "lng": 102.4703 },
+    { "name": "Stesen Auksiliari Sek. Keb. Chabau", "lat": 2.2356, "lng": 102.4839 },
+    { "name": "Stesen Auksiliari Stesen MARDI Cameron Highlands", "lat": 4.4719, "lng": 101.3853 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Teluk Bharu", "lat": 3.9631, "lng": 100.9575 },
+    { "name": "Stesen Auksiliari Pusat Latihan Pertanian Titi Serong", "lat": 5.0681, "lng": 100.4686 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Lekir", "lat": 4.1408, "lng": 100.7417 },
+    { "name": "Stesen Auksiliari Stesen Penyelidikan Pertanian FELDA Selama", "lat": 5.2289, "lng": 100.6869 },
+    { "name": "Stesen Auksiliari MARDI Bagan Datoh", "lat": 3.8867, "lng": 100.8358 },
+    { "name": "Stesen Auksiliari Loji Air Sultan Idris II", "lat": 4.0200, "lng": 101.0267 },
+    { "name": "Stesen Auksiliari SMK Seri Perak", "lat": 4.0211, "lng": 101.0089 },
+    { "name": "Stesen Auksiliari Sek. Men. Keb. Slim River", "lat": 3.8342, "lng": 101.4011 },
+    { "name": "Stesen Auksiliari Sek. Men. Keb. Sultan Tajul Ariffin", "lat": 4.9389, "lng": 100.7817 },
+    { "name": "Stesen Auksiliari Sek. Men. Keb. Dr. Burhanuddin", "lat": 4.8469, "lng": 100.7417 },
+    { "name": "Stesen Auksiliari Sek. Keb. Tapah", "lat": 4.1925, "lng": 101.2608 },
+    { "name": "Stesen Auksiliari SM Teknik Kompleks Pertanian Lenggong", "lat": 5.0933, "lng": 100.9639 },
+    { "name": "Stesen Auksiliari Sek. Men. Keb. Pangkor", "lat": 4.2250, "lng": 100.5658 },
+    { "name": "Stesen Auksiliari Loji Rawatan Air Gunung Semanggol", "lat": 5.0211, "lng": 100.6417 },
+    { "name": "Stesen Auksiliari Klinik Desa Padang Rengas", "lat": 4.7778, "lng": 100.8528 },
+    { "name": "Stesen Auksiliari Hospital Baling", "lat": 5.6792, "lng": 100.9167 },
+    { "name": "Stesen Auksiliari Loji Air Parit Buntar", "lat": 5.1228, "lng": 100.4883 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Tapah", "lat": 4.1983, "lng": 101.2589 },
+    { "name": "Stesen Auksiliari Stesen MARDI Kuala Kangsar", "lat": 4.7578, "lng": 100.9317 },
+    { "name": "Stesen Auksiliari Sek. Keb. Sungai Siput (U)", "lat": 4.8197, "lng": 101.0717 },
+    { "name": "Stesen Auksiliari Sek. Keb. Sri Adika Raja", "lat": 5.4267, "lng": 101.1278 },
+    { "name": "Stesen Auksiliari Sek. Keb. Felda Besout 1", "lat": 3.7314, "lng": 101.2828 },
+    { "name": "Stesen Auksiliari Pusat Latihan Pertanian Sungai Sumun", "lat": 3.8828, "lng": 100.8600 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Seri Manjung", "lat": 4.1856, "lng": 100.6653 },
+    { "name": "Stesen Auksiliari Stesen MARDI Jeram", "lat": 3.2383, "lng": 101.3789 },
+    { "name": "Stesen Auksiliari Stesen MARDI Serdang", "lat": 2.9981, "lng": 101.7019 },
+    { "name": "Stesen Auksiliari Pusat Latihan Pertanian Telok Datok", "lat": 2.8108, "lng": 101.4933 },
+    { "name": "Stesen Auksiliari Stesen MARDI Tanjung Karang", "lat": 3.4686, "lng": 101.1578 },
+    { "name": "Stesen Auksiliari Kompleks Pertanian Sungai Leman", "lat": 3.5606, "lng": 101.0803 },
+    { "name": "Stesen Auksiliari Sek. Keb. Sungai Binjai", "lat": 3.0903, "lng": 101.4422 },
+    { "name": "Stesen Auksiliari Pusat Pengeluaran Benih Pertanian Cheras", "lat": 3.0378, "lng": 101.7619 },
+    { "name": "Stesen Auksiliari Loji Air Rantau Panjang", "lat": 3.2981, "lng": 101.4447 },
+    { "name": "Stesen Auksiliari Hospital Kuala Kubu Bharu", "lat": 3.5644, "lng": 101.6508 },
+    { "name": "Stesen Auksiliari Sek. Men. Keb. Sungai Besar", "lat": 3.6706, "lng": 100.9889 },
+    { "name": "Stesen Auksiliari Loji Air Semenyih", "lat": 2.9242, "lng": 101.8389 },
+    { "name": "Stesen Auksiliari SM Teknik Sepang", "lat": 2.8228, "lng": 101.7408 },
+    { "name": "Stesen Auksiliari Stesen MARDI Klang", "lat": 3.0039, "lng": 101.4011 },
+    { "name": "Stesen Auksiliari Loji Air Sungai Bernam", "lat": 3.6800, "lng": 101.3700 },
+    { "name": "Stesen Auksiliari Loji Rawatan Air Sungai Batu", "lat": 3.2667, "lng": 101.6833 },
+    { "name": "Stesen Auksiliari Sek. Keb. Sungai Pelalek", "lat": 3.3931, "lng": 101.2725 },
+    { "name": "Stesen Auksiliari Sek. Keb. Salak", "lat": 2.7844, "lng": 101.7333 },
+    { "name": "Stesen Auksiliari SM Sains Hulu Selangor", "lat": 3.4475, "lng": 101.6703 },
+    { "name": "Stesen Auksiliari Loji Rawatan Air Kepong", "lat": 3.2294, "lng": 101.6367 },
+    { "name": "Stesen Auksiliari Sek. Keb. Bukit Badong", "lat": 3.3131, "lng": 101.4117 },
+    { "name": "Stesen Auksiliari Loji Rawatan Air Sungai Langat", "lat": 3.0806, "lng": 101.7878 },
+    { "name": "Stesen Auksiliari Hospital Sabak Bernam", "lat": 3.7667, "lng": 100.9883 },
+    { "name": "Stesen Auksiliari Sek. Men. Keb. Banting", "lat": 2.8089, "lng": 101.5033 },
+    { "name": "Stesen Auksiliari Stesen MARDI Kuala Linggi (Selangor)", "lat": 2.3822, "lng": 102.0169 },
+    { "name": "Stesen Auksiliari Sek. Keb. Sungai Rawang", "lat": 2.6289, "lng": 101.7061 },
+    { "name": "Stesen Auksiliari SK Sungai Pelek", "lat": 2.6428, "lng": 101.7161 },
+    { "name": "Stesen Auksiliari SK Dengkil", "lat": 2.8592, "lng": 101.6811 },
+    { "name": "Stesen Auksiliari SK Sungai Choh", "lat": 3.3278, "lng": 101.5739 },
+    { "name": "Stesen Auksiliari SAM Bandar Baru Salak Tinggi", "lat": 2.8125, "lng": 101.7358 },
+    { "name": "Stesen Auksiliari SM Sains Kuala Selangor", "lat": 3.3228, "lng": 101.2728 },
+    { "name": "Stesen Auksiliari SK Berendam", "lat": 3.5283, "lng": 101.3267 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Kemasik", "lat": 4.4172, "lng": 103.4561 },
+    { "name": "Stesen Auksiliari Stesen MARDI Jerangau", "lat": 4.8361, "lng": 103.2081 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Ajil", "lat": 5.0803, "lng": 103.0867 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Chalok", "lat": 5.4192, "lng": 102.8228 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Pelagat", "lat": 5.7289, "lng": 102.5028 },
+    { "name": "Stesen Auksiliari Hospital Besut", "lat": 5.7539, "lng": 102.5528 },
+    { "name": "Stesen Auksiliari Kolej Vokasional Wakaf Tembusu", "lat": 5.3781, "lng": 103.0850 },
+    { "name": "Stesen Auksiliari Sek. Men. Sains Dungun", "lat": 4.7303, "lng": 103.4189 },
+    { "name": "Stesen Auksiliari SK Pasir Gajah", "lat": 4.2411, "lng": 103.2953 },
+    { "name": "Stesen Auksiliari Pusat Latihan Pertanian Paya Datok", "lat": 5.5900, "lng": 102.4836 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Marang", "lat": 5.2028, "lng": 103.2072 },
+    { "name": "Stesen Auksiliari SK LKTP Belara", "lat": 5.2631, "lng": 103.0039 },
+    { "name": "Stesen Auksiliari Kompleks Pertanian Sungai Baging", "lat": 4.0722, "lng": 103.3889 },
+    { "name": "Stesen Auksiliari MARDI Muadzam Shah", "lat": 3.0642, "lng": 103.0853 },
+    { "name": "Stesen Auksiliari Loji Air Chini", "lat": 3.3242, "lng": 102.8794 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Bukit Rokan", "lat": 2.5083, "lng": 102.4283 },
+    { "name": "Stesen Auksiliari Loji Air Mempaga", "lat": 3.5358, "lng": 101.9961 },
+    { "name": "Stesen Auksiliari Sek. Men. Keb. Triang 3", "lat": 3.1672, "lng": 102.3958 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Chenor", "lat": 3.4867, "lng": 102.5925 },
+    { "name": "Stesen Auksiliari Loji Rawatan Air Gali", "lat": 3.8631, "lng": 101.8883 },
+    { "name": "Stesen Auksiliari Pusat Latihan Pertanian Inderapura", "lat": 3.7547, "lng": 103.2503 },
+    { "name": "Stesen Auksiliari Kompleks Pertanian Teluk Cempedak", "lat": 3.8094, "lng": 103.3711 },
+    { "name": "Stesen Auksiliari Sek. Keb. Sungai Soi", "lat": 3.7381, "lng": 103.3236 },
+    { "name": "Stesen Auksiliari Sek. Keb. Lepar", "lat": 3.6331, "lng": 102.9367 },
+    { "name": "Stesen Auksiliari Pusat Pertanian Sungai Bedaun", "lat": 5.2639, "lng": 115.2281 },
+    { "name": "Stesen Auksiliari Stesen MARDI Cameron Highlands (Labuan)", "lat": 5.2833, "lng": 115.2333 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Merotai", "lat": 4.3853, "lng": 117.8286 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Quoin Hill", "lat": 4.4172, "lng": 118.0247 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Lahad Datu", "lat": 5.0311, "lng": 118.3183 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Telupid", "lat": 5.6264, "lng": 117.1264 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Ulu Dusun", "lat": 5.7828, "lng": 117.9547 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Kota Belud", "lat": 6.3536, "lng": 116.4283 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Tenom", "lat": 5.1228, "lng": 115.9458 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Tuaran", "lat": 6.1772, "lng": 116.2306 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Beaufort", "lat": 5.3464, "lng": 115.7489 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Papar", "lat": 5.7336, "lng": 115.9328 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Kundasang", "lat": 5.9867, "lng": 116.5786 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Lagud Seberang", "lat": 5.0883, "lng": 115.9228 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Mengattal", "lat": 6.0236, "lng": 116.1558 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Sandakan", "lat": 5.8458, "lng": 118.0608 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Keningau", "lat": 5.3386, "lng": 116.1583 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Kota Marudu", "lat": 6.4950, "lng": 116.7686 },
+    { "name": "Stesen Auksiliari Stesen Penyelidikan MARDI Saratok", "lat": 1.7483, "lng": 111.3411 },
+    { "name": "Stesen Auksiliari Pusat Penyelidikan Pertanian Semenggok", "lat": 1.3986, "lng": 110.3208 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Tarat", "lat": 1.2094, "lng": 110.4578 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Kabuloh", "lat": 4.1200, "lng": 113.8867 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Limbang", "lat": 4.7522, "lng": 115.0089 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Lawas", "lat": 4.8569, "lng": 115.4028 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Kapit", "lat": 2.0161, "lng": 112.9389 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Marudi", "lat": 4.1803, "lng": 114.3236 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Simunjan", "lat": 1.3986, "lng": 110.7850 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Bau", "lat": 1.4136, "lng": 110.1586 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Lundu", "lat": 1.6739, "lng": 109.8519 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Serian", "lat": 1.1719, "lng": 110.5694 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Lubok Antu", "lat": 1.0408, "lng": 111.8328 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Betong", "lat": 1.4111, "lng": 111.5283 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Mukah", "lat": 2.8986, "lng": 112.0911 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Kanowit", "lat": 2.1039, "lng": 112.1558 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Bintulu", "lat": 3.2081, "lng": 113.0886 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Tatau", "lat": 2.8767, "lng": 112.8600 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Belaga", "lat": 2.7039, "lng": 113.7808 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Sundar", "lat": 4.8867, "lng": 115.2039 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Bario", "lat": 3.7533, "lng": 115.4528 },
+    { "name": "Stesen Auksiliari Pejabat Pertanian Dalat", "lat": 2.7417, "lng": 111.9472 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Sebauh", "lat": 3.1111, "lng": 113.2625 },
+    { "name": "Stesen Auksiliari Stesen MARDI Bintulu", "lat": 3.2167, "lng": 113.0833 },
+    { "name": "Stesen Auksiliari Stesen MARDI Sessang", "lat": 1.9167, "lng": 111.2167 }
+];
+
 // ================================================================
 // 1. FUNGSI TERAS CHAT (Toggle, Send, Add Message)
 // ================================================================
@@ -156,9 +396,8 @@ function addMessage(text, sender) {
 
     saveChatLog(sender, text);
 
-    // 💡 LOGIK PETA KEBANGSAAN LEAFLET (KEMAS KINI KALIS BLANK & AUTOPILOT REGIONAL)
+    // 💡 LOGIK PETA KEBANGSAAN LEAFLET (STESEN UTAMA & STESEN AUKISILIARI)
     if (text.includes('id="leafletMap"')) {
-        // Kita naikkan masa menunggu ke 400ms supaya buih chat selesai kembang sepenuhnya
         setTimeout(() => {
             try {
                 const stations = [
@@ -214,7 +453,7 @@ function addMessage(text, sender) {
 
                 // 🗺️ Logik Pembahagian Geografi & Super Zoom untuk Daerah
                 if (userMsg.includes("langkawi")) { 
-                    mapCenter = [6.3333, 99.7333]; zoomLevel = 11; // ⚡ TEPAT KE PULAU LANGKAWI
+                    mapCenter = [6.3333, 99.7333]; zoomLevel = 11; 
                 }
                 else if (userMsg.includes("sabah") || userMsg.includes("tawau") || userMsg.includes("sandakan") || userMsg.includes("kudat") || userMsg.includes("keningau") || userMsg.includes("ranau") || userMsg.includes("kota kinabalu")) { 
                     mapCenter = [5.8, 117.0]; zoomLevel = 8; 
@@ -252,13 +491,29 @@ function addMessage(text, sender) {
                     attribution: '© OpenStreetMap'
                 }).addTo(map);
 
-                // 3. Sumbat semua marker
-                stations.forEach(st => {
-                    L.marker([st.lat, st.lng]).addTo(map)
-                        .bindPopup(`<b>${st.name}</b><br>Negeri: ${st.state.toUpperCase()}`);
+                // 🔴 Ikon Merah Khas untuk Stesen Auksiliari
+                const redIcon = L.icon({
+                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
                 });
 
-                // 4. Double check force rendering tile 
+                // 3. Masukkan Marker Stesen Utama (Pin Biru Standar)
+                stations.forEach(st => {
+                    L.marker([st.lat, st.lng]).addTo(map)
+                        .bindPopup(`<b>${st.name}</b><br><span style="color:blue;"><b>Kategori: Stesen Utama</b></span><br>Negeri: ${st.state ? st.state.toUpperCase() : 'MALAYSIA'}`);
+                });
+
+                // 4. Masukkan Marker Stesen Auksiliari (Pin Merah)
+                auxiliaryStations.forEach(st => {
+                    L.marker([st.lat, st.lng], { icon: redIcon }).addTo(map)
+                        .bindPopup(`<b>${st.name}</b><br><span style="color:red;"><b>Kategori: Stesen Auksiliari</b></span>`);
+                });
+
+                // 5. Force rendering tile
                 setTimeout(() => {
                     map.invalidateSize();
                 }, 100);
@@ -266,7 +521,7 @@ function addMessage(text, sender) {
             } catch (mapError) {
                 console.error("Gagal memaparkan peta Satu Malaysia:", mapError);
             }
-        }, 400); // Dilebihkan ke 400ms untuk bagi HTML bersedia sepenuhnya
+        }, 400); 
     }
 }
 
@@ -347,11 +602,10 @@ function showFaqOptions(lang) {
             <button class="lang-btn" onclick="quickAsk('Portal pembelian MyMETdata', event)">Portal MyMETData</button>
             <button class="lang-btn" onclick="quickAsk('Urusan bayaran', event)">Urusan Bayaran</button>
             <button class="lang-btn" onclick="quickAsk('Walk-in', event)">Urusan Walk-in</button>
-            <button class="lang-btn" onclick="quickAsk('Tempoh data', event)">Tempoh Data </button>
+            <button class="lang-btn" onclick="quickAsk('Tempoh proses data', event)">Tempoh Proses Data</button>
             <button class="lang-btn" onclick="quickAsk('Jenis format data', event)">Jenis & Format Data</button>
             <button class="lang-btn" onclick="quickAsk('Pengecualian yuran & Diskaun pelajar', event)">Pengecualian Fi Pelajar</button>
             <button class="lang-btn" onclick="quickAsk('Prosedur & Dokumen sokongan', event)">Prosedur & Dokumen</button>
-            <button class="lang-btn" onclick="quickAsk('Tempoh proses data', event)">Tempoh Proses Data</button>
             <button class="lang-btn" onclick="quickAsk('Pegawai bertugas', event)">📞 Hubungi Pegawai</button>
         `;
     } else {
@@ -362,11 +616,10 @@ function showFaqOptions(lang) {
             <button class="lang-btn" onclick="quickAsk('myMETdata portal', event)">MyMETData Portal</button>
             <button class="lang-btn" onclick="quickAsk('Payment', event)">Payment Info</button>
             <button class="lang-btn" onclick="quickAsk('Walk-in / Counter services', event)">Walk-in Counter</button>
-            <button class="lang-btn" onclick="quickAsk('Data period', event)">Data Period</button>
+            <button class="lang-btn" onclick="quickAsk('Data processing period', event)">Data Processing Period</button>
             <button class="lang-btn" onclick="quickAsk('Data format', event)">Data Types & Format</button>
             <button class="lang-btn" onclick="quickAsk('Fee waivers & Student discount', event)">Student Fee Waiver</button>
             <button class="lang-btn" onclick="quickAsk('Procedures & Required documents', event)">Documents Required</button>
-            <button class="lang-btn" onclick="quickAsk('Data processing period', event)">Data processing period</button>
             <button class="lang-btn" onclick="quickAsk('Officer in charge', event)">📞 Contact Officer</button>
         `;
     }    
@@ -458,7 +711,7 @@ function saveChatLog(sender, message) {
     localStorage.setItem('chatLogs', JSON.stringify(logs));
 }
 
-const suggestionList = ["cara membeli data?", "tempoh data","jenis data yang ditawarkan?", "cara membuat bayaran?", "Siapa boleh saya hubungi untuk bantuan?"];
+const suggestionList = ["cara membeli data?", "tempoh data", "jenis data yang ditawarkan?", "cara membuat bayaran?", "Siapa boleh saya hubungi untuk bantuan?"];
 const userInputField = document.getElementById("userInput");
 const suggestionBox = document.getElementById("inputSuggestions");
 

@@ -50,9 +50,9 @@ const faqData = [
         answerEN: 'Sir/Madam can come to Floor 3, National Climate Centre, Department of Meteorology Malaysia, 46667 Petaling Jaya, Selangor.'
     },
     {
-        keywords: ['tempoh data legal', 'data non-routine', 'compiling data', '3 hari bekerja', '7 hari bekerja', 'legal & non-routine data period', 'tempoh data legal & non-routine'],
-        answerBM: 'Permohonan bagi kategori berbayar (Legal) akan diproses dalam tempoh 3 hingga 5 hari bekerja, manakala permohonan bagi data Non-Routine diproses dalam tempoh 7 hingga 10 hari bekerja selepas status bertukar "Compiling data". Data dibekalkan dalam masa 1 hari bekerja selepas bayaran disahkan.',
-        answerEN: 'Applications for the paid category (Legal) will be processed within 3 to 5 working days, while Non-Routine data applications will be processed within 7 to 10 working days after the status changes to "Compiling data". Data will be provided within 1 working day once payment is confirmed.'
+        keywords: ['tempoh data legal', 'data non-routine', 'compiling data', '3 hari bekerja', '7 hari bekerja', 'legal & non-routine data period', 'tempoh data legal & non-routine', 'special data period'],
+        answerBM: 'Permohonan bagi kategori berbayar akan diproses dalam tempoh 3 hingga 5 hari bekerja, manakala permohonan kategori remitan / pengecualian bayaran (pelajar/agensi kerajaan) akan diproses dalam tempoh 7 hingga 10 hari bekerja. Data iklim yang dipohon akan dibekalkan dalam tempoh 1 hari bekerja selepas pembayaran diterima.',
+        answerEN: 'Applications for the paid category will be processed within 3 to 5 working days, while remittance / fee waiver applications (students/government agencies) will be processed within 7 to 10 working days. Requested climate data will be provided within 1 working day after payment is received.'
     },
     {
         keywords: ['perintah fi', 'katalog data', 'format data', 'jenis data', 'data format', 'data catalog', 'jenis format data'],
@@ -70,7 +70,7 @@ const faqData = [
         answerEN: 'Required documents for Non-Routine data applications:<br>1. Copy of IC & student / staff card<br>2. Official support letter from the institution or agency<br>3. Brief description of the project/research<br>4. Confirmation letter of no external sponsorship'
     },
     {
-        keywords: ['stesen cuaca', 'stesen meteorologi', 'lokasi stesen', 'senarai stesen', 'stesen malaysia', 'stesen di', 'stesen dekat', 'stesen', 'penang', 'pulau pinang', 'kedah', 'perlis', 'ipoh', 'perak', 'selangor', 'kl', 'peta stesen', 'stesen mana', 'paling dekat'],
+        keywords: ['stesen cuaca', 'stesen meteorologi', 'lokasi stesen', 'senarai stesen', 'stesen malaysia', 'stesen di', 'stesen dekat', 'stesen', 'penang', 'pulau pinang', 'kedah', 'perlis', 'ipoh', 'perak', 'selangor', 'kl', 'peta stesen', 'stesen mana', 'paling dekat', 'pahang', 'sabah', 'sarawak', 'johor', 'kelantan', 'terengganu', 'melaka', 'negeri sembilan'],
         answerBM: 'Berikut ialah peta interaktif stesen meteorologi utama di Malaysia bagi negeri yang anda cari:<br><br><div id="leafletMap" style="width: 100%; height: 220px; border-radius: 8px; margin-top: 10px; border: 1px solid #ccc;"></div>',
         answerEN: 'Here is the interactive map of primary meteorological stations in Malaysia for the state you searched for:<br><br><div id="leafletMap" style="width: 100%; height: 220px; border-radius: 8px; margin-top: 10px; border: 1px solid #ccc;"></div>'
     },
@@ -125,7 +125,7 @@ app.post("/chat", async (req, res) => {
                - Paragraph 3: A friendly follow-up closing question at the end (e.g., "Would you like to know more about...").
             3. It is STRICTLY FORBIDDEN to mention the words "JSON", "database", "provided file", "knowledgeData", or "information from JSON" in your response. Act as if you naturally know all this information.
             4. LANGUAGE RULE: You MUST reply 100% in ENGLISH. Do not mix languages or use Malay words.
-            5. If the user's question is about weather stations or locations, advise them to type "Stesen Cuaca" to view the Interactive Map.
+            5. If the user's question is about weather stations, locations, or states, advise them to type "Weather station" to view the Interactive Map.
             6. If the user's question is completely unrelated to MET Malaysia's scope or meteorology, politely state that you are only trained for the department's scope.`;
         } else {
             promptSystem = `Anda ialah AIDA, AI Chatbot rasmi untuk Jabatan Meteorologi Malaysia (MET Malaysia). Tahun semasa ialah 2026.
@@ -141,7 +141,7 @@ app.post("/chat", async (req, res) => {
                - Perenggan 3: Soalan ramah pembuka bicara di hujung jawapan (Contoh: "Adakah anda ingin tahu lebih lanjut mengenai...").
             3. HARAM dan DILARANG SAMA SEKALI menyebut perkataan "JSON", "pangkalan data", "fail yang diberikan", "knowledgeData", atau "maklumat dari JSON" dalam jawapan anda. Berlakon seolah-olah anda memang sudah tahu semua maklumat ini secara semula jadi.
             4. PERATURAN BAHASA: Anda WAJIB menjawab 100% dalam BAHASA MALAYSIA yang profesional tanpa bercampur bahasa.
-            5. Sekiranya soalan pengguna berkaitan lokasi stesen cuaca, nasihatkan pengguna untuk menaip "Stesen Cuaca" untuk melihat Peta Interaktif.
+            5. Sekiranya soalan pengguna berkaitan lokasi, stesen cuaca, atau daerah, nasihatkan pengguna untuk menaip "Stesen cuaca" untuk melihat Peta Interaktif.
             6. Sekiranya soalan pengguna tidak berkaitan dengan skop MET Malaysia atau meteorologi, jawab dengan sopan bahawa anda hanya dilatih untuk skop jabatan sahaja.`;
         }
         

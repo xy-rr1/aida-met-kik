@@ -181,7 +181,7 @@ function addMessage(text, sender) {
                     { "name": "Stesen Meteorologi Muadzam Shah", "lat": 3.05, "lng": 103.0833, "state": "pahang" },
                     { "name": "Stesen Meteorologi Klia Sepang", "lat": 2.7308, "lng": 101.7031, "state": "selangor" },
                     { "name": "Stesen Meteorologi Kuala Pilah", "lat": 2.7269, "lng": 102.2489, "state": "negeri sembilan" },
-                    { "name": "Stesen Meteorologi Temerloh", "lat": 3.4667, "lng": 102.3833, "state": "pahang" },
+                    { "name": "Stesen Meteorologi Temerloh", "lat": 3.4712, "lng": 102.3790, "state": "pahang" },
                     { "name": "Stesen Meteorologi Kuantan", "lat": 3.7722, "lng": 103.2119, "state": "pahang" },
                     { "name": "Stesen Meteorologi Melaka", "lat": 2.2667, "lng": 102.25, "state": "melaka" },
                     { "name": "Stesen Meteorologi Batu Pahat", "lat": 1.8667, "lng": 102.9833, "state": "johor" },

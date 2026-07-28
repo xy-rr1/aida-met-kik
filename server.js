@@ -101,14 +101,14 @@ const faqData = [
         keywords: ['stesen cuaca', 'stesen meteorologi', 'lokasi stesen', 'senarai stesen', 'stesen malaysia', 'stesen di', 'stesen dekat', 'stesen', 'penang', 'pulau pinang', 'kedah', 'perlis', 'ipoh', 'perak', 'selangor', 'kl', 'peta stesen', 'stesen mana', 'paling dekat', 'pahang', 'sabah', 'sarawak', 'johor', 'kelantan', 'terengganu', 'melaka', 'negeri sembilan'],
         answerBM: 'Berikut ialah peta interaktif stesen meteorologi di Malaysia bagi kawasan yang anda cari:<br><br>' +
                   '<b>Petunjuk Peta:</b><br>' +
-                  '🔵 <b>Biru:</b> Stesen Utama<br>' +
-                  '🔴 <b>Merah:</b> Stesen Auksiliari<br><br>' +
-                  '<div id="leafletMap" style="width: 100%; height: 220px; border-radius: 8px; margin-top: 5px; border: 1px solid #ccc;"></div>',
+                  '🔵 <b>Biru:</b> Stesen Utama | 🔴 <b>Merah:</b> Stesen Auksiliari<br><br>' +
+                  '<input type="text" class="map-search-input" placeholder="🔍 Cari nama stesen..." style="width:100%; padding:6px 10px; margin-bottom:8px; border-radius:6px; border:1px solid #ccc; font-size:12px; box-sizing:border-box;">' +
+                  '<div id="leafletMap" style="width: 100%; height: 220px; border-radius: 8px; border: 1px solid #ccc;"></div>',
         answerEN: 'Here is the interactive map of meteorological stations in Malaysia for the area you searched for:<br><br>' +
                   '<b>Map Legend:</b><br>' +
-                  '🔵 <b>Blue:</b> Main Station<br>' +
-                  '🔴 <b>Red:</b> Auxiliary Station<br><br>' +
-                  '<div id="leafletMap" style="width: 100%; height: 220px; border-radius: 8px; margin-top: 5px; border: 1px solid #ccc;"></div>'
+                  '🔵 <b>Blue:</b> Main Station | 🔴 <b>Red:</b> Auxiliary Station<br><br>' +
+                  '<input type="text" class="map-search-input" placeholder="🔍 Search station name..." style="width:100%; padding:6px 10px; margin-bottom:8px; border-radius:6px; border:1px solid #ccc; font-size:12px; box-sizing:border-box;">' +
+                  '<div id="leafletMap" style="width: 100%; height: 220px; border-radius: 8px; border: 1px solid #ccc;"></div>'
     },
     {
         keywords: ['pegawai dihubungi','pegawai bertugas', 'hubungi pegawai', 'nama pegawai', 'nombor telefon pegawai', 'contact person', 'officer in charge', 'siapa hubungi', 'hubungi', 'telefon', 'nombor'],

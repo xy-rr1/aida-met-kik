@@ -396,7 +396,7 @@ function addMessage(text, sender) {
 
     saveChatLog(sender, text);
 
-    // 💡 LOGIK PETA KEBANGSAAN LEAFLET (STESEN UTAMA & STESEN AUKISILIARI MODEN BULATAN)
+// 💡 LOGIK PETA KEBANGSAAN LEAFLET (STESEN UTAMA, AUKISILIARI & KOTAK CARIAN)
     if (text.includes('id="leafletMap"')) {
         setTimeout(() => {
             try {
@@ -451,82 +451,71 @@ function addMessage(text, sender) {
                 let mapCenter = [4.2105, 101.9758]; 
                 let zoomLevel = 6; 
 
-                // 🗺️ Logik Pembahagian Geografi & Super Zoom untuk Daerah
-                if (userMsg.includes("langkawi")) { 
-                    mapCenter = [6.3333, 99.7333]; zoomLevel = 11; 
-                }
-                else if (userMsg.includes("sabah") || userMsg.includes("tawau") || userMsg.includes("sandakan") || userMsg.includes("kudat") || userMsg.includes("keningau") || userMsg.includes("ranau") || userMsg.includes("kota kinabalu")) { 
-                    mapCenter = [5.8, 117.0]; zoomLevel = 8; 
-                }
-                else if (userMsg.includes("sarawak") || userMsg.includes("kuching") || userMsg.includes("miri") || userMsg.includes("bintulu") || userMsg.includes("sibu") || userMsg.includes("kapit") || userMsg.includes("mulu") || userMsg.includes("limbang") || userMsg.includes("mukah")) { 
-                    mapCenter = [2.5, 113.0]; zoomLevel = 7; 
-                }
-                else if (userMsg.includes("utara") || userMsg.includes("kedah") || userMsg.includes("penang") || userMsg.includes("pinang") || userMsg.includes("perlis") || userMsg.includes("alor setar") || userMsg.includes("butterworth") || userMsg.includes("chuping")) { 
-                    mapCenter = [6.0, 100.4]; zoomLevel = 8; 
-                }
-                else if (userMsg.includes("johor") || userMsg.includes("senai") || userMsg.includes("kluang") || userMsg.includes("batu pahat") || userMsg.includes("mersing")) { 
-                    mapCenter = [1.9, 103.3]; zoomLevel = 8; 
-                }
-                else if (userMsg.includes("pantai timur") || userMsg.includes("kelantan") || userMsg.includes("terengganu") || userMsg.includes("bharu") || userMsg.includes("krai") || userMsg.includes("gong kedak") || userMsg.includes("kerteh")) { 
-                    mapCenter = [5.5, 102.8]; zoomLevel = 8; 
-                }
-                else if (userMsg.includes("perak") || userMsg.includes("ipoh") || userMsg.includes("sitiawan") || userMsg.includes("lubok merbau")) { 
-                    mapCenter = [4.6, 101.0]; zoomLevel = 8; 
-                }
-                else if (userMsg.includes("pahang") || userMsg.includes("kuantan") || userMsg.includes("cameron") || userMsg.includes("batu embun") || userMsg.includes("muadzam") || userMsg.includes("temerloh")) { 
-                    mapCenter = [3.8, 102.5]; zoomLevel = 8; 
-                }
-                else if (userMsg.includes("selangor") || userMsg.includes("kl") || userMsg.includes("kuala lumpur") || userMsg.includes("subang") || userMsg.includes("sepang") || userMsg.includes("klia")) { 
-                    mapCenter = [3.1306, 101.5525]; zoomLevel = 9; 
-                }
-                else if (userMsg.includes("melaka") || userMsg.includes("negeri sembilan") || userMsg.includes("pilah")) { 
-                    mapCenter = [2.5, 102.2]; zoomLevel = 9; 
-                }
+                if (userMsg.includes("langkawi")) { mapCenter = [6.3333, 99.7333]; zoomLevel = 11; }
+                else if (userMsg.includes("sabah") || userMsg.includes("tawau") || userMsg.includes("sandakan") || userMsg.includes("kudat") || userMsg.includes("keningau") || userMsg.includes("ranau") || userMsg.includes("kota kinabalu")) { mapCenter = [5.8, 117.0]; zoomLevel = 8; }
+                else if (userMsg.includes("sarawak") || userMsg.includes("kuching") || userMsg.includes("miri") || userMsg.includes("bintulu") || userMsg.includes("sibu") || userMsg.includes("kapit") || userMsg.includes("mulu") || userMsg.includes("limbang") || userMsg.includes("mukah")) { mapCenter = [2.5, 113.0]; zoomLevel = 7; }
+                else if (userMsg.includes("utara") || userMsg.includes("kedah") || userMsg.includes("penang") || userMsg.includes("pinang") || userMsg.includes("perlis") || userMsg.includes("alor setar") || userMsg.includes("butterworth") || userMsg.includes("chuping")) { mapCenter = [6.0, 100.4]; zoomLevel = 8; }
+                else if (userMsg.includes("johor") || userMsg.includes("senai") || userMsg.includes("kluang") || userMsg.includes("batu pahat") || userMsg.includes("mersing")) { mapCenter = [1.9, 103.3]; zoomLevel = 8; }
+                else if (userMsg.includes("pantai timur") || userMsg.includes("kelantan") || userMsg.includes("terengganu") || userMsg.includes("bharu") || userMsg.includes("krai") || userMsg.includes("gong kedak") || userMsg.includes("kerteh")) { mapCenter = [5.5, 102.8]; zoomLevel = 8; }
+                else if (userMsg.includes("perak") || userMsg.includes("ipoh") || userMsg.includes("sitiawan") || userMsg.includes("lubok merbau")) { mapCenter = [4.6, 101.0]; zoomLevel = 8; }
+                else if (userMsg.includes("pahang") || userMsg.includes("kuantan") || userMsg.includes("cameron") || userMsg.includes("batu embun") || userMsg.includes("muadzam") || userMsg.includes("temerloh")) { mapCenter = [3.8, 102.5]; zoomLevel = 8; }
+                else if (userMsg.includes("selangor") || userMsg.includes("kl") || userMsg.includes("kuala lumpur") || userMsg.includes("subang") || userMsg.includes("sepang") || userMsg.includes("klia")) { mapCenter = [3.1306, 101.5525]; zoomLevel = 9; }
+                else if (userMsg.includes("melaka") || userMsg.includes("negeri sembilan") || userMsg.includes("pilah")) { mapCenter = [2.5, 102.2]; zoomLevel = 9; }
 
-                // 1. Lakarkan peta Leaflet menggunakan ID Unik yang dijana
+                // 1. Bina Peta Leaflet
                 const map = L.map(uniqueMapId).setView(mapCenter, zoomLevel);
 
-                // 2. Masukkan tile OpenStreetMap
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '© OpenStreetMap'
                 }).addTo(map);
 
-                // 🔵 3. Masukkan Marker Stesen UTAMA (Bulatan Biru Sederhana)
+                // Array simpan rujukan semua marker untuk carian
+                const allMarkers = [];
+
+                // 🔵 2. Masukkan Stesen UTAMA (Bulatan Biru)
                 stations.forEach(st => {
-                    L.circleMarker([st.lat, st.lng], {
-                        radius: 6,
-                        fillColor: "#0056b3",
-                        color: "#ffffff",
-                        weight: 2,
-                        opacity: 1,
-                        fillOpacity: 0.9
+                    const marker = L.circleMarker([st.lat, st.lng], {
+                        radius: 6, fillColor: "#0056b3", color: "#ffffff", weight: 2, opacity: 1, fillOpacity: 0.9
                     }).addTo(map)
                         .bindPopup(`<b>${st.name}</b><br><span style="color:blue;"><b>Kategori: Stesen Utama</b></span><br>Negeri: ${st.state ? st.state.toUpperCase() : 'MALAYSIA'}`);
+                    
+                    allMarkers.push({ name: st.name.toLowerCase(), marker: marker, lat: st.lat, lng: st.lng });
                 });
 
-                // 🔴 4. Masukkan Marker Stesen AUKISILIARI (Bulatan Merah Kecil Comel)
+                // 🔴 3. Masukkan Stesen AUKISILIARI (Bulatan Merah)
                 auxiliaryStations.forEach(st => {
-                    L.circleMarker([st.lat, st.lng], {
-                        radius: 4,
-                        fillColor: "#dc3545",
-                        color: "#ffffff",
-                        weight: 1,
-                        opacity: 1,
-                        fillOpacity: 0.8
+                    const marker = L.circleMarker([st.lat, st.lng], {
+                        radius: 4, fillColor: "#dc3545", color: "#ffffff", weight: 1, opacity: 1, fillOpacity: 0.8
                     }).addTo(map)
                         .bindPopup(`<b>${st.name}</b><br><span style="color:red;"><b>Kategori: Stesen Auksiliari</b></span>`);
+                    
+                    allMarkers.push({ name: st.name.toLowerCase(), marker: marker, lat: st.lat, lng: st.lng });
                 });
 
-                // 5. Force rendering tile
-                setTimeout(() => {
-                    map.invalidateSize();
-                }, 100);
+                // 🔍 4. FUNGSI CARIAN NAMA STESEN DALAM PETA
+                const mapContainer = document.getElementById(uniqueMapId);
+                const searchInput = mapContainer.parentElement.querySelector('.map-search-input');
+
+                if (searchInput) {
+                    searchInput.addEventListener('input', function () {
+                        const query = this.value.toLowerCase().trim();
+                        if (query.length < 2) return;
+
+                        // Cari stesen pertama yang sepadan
+                        const found = allMarkers.find(item => item.name.includes(query));
+                        if (found) {
+                            map.flyTo([found.lat, found.lng], 12, { duration: 1.2 });
+                            found.marker.openPopup();
+                        }
+                    });
+                }
+
+                setTimeout(() => { map.invalidateSize(); }, 100);
                 
             } catch (mapError) {
-                console.error("Gagal memaparkan peta Satu Malaysia:", mapError);
+                console.error("Gagal memaparkan peta:", mapError);
             }
         }, 400); 
-    }
 }
 
 function setLanguage(lang, event) {

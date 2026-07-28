@@ -347,7 +347,7 @@ function showFaqOptions(lang) {
             <button class="lang-btn" onclick="quickAsk('Portal pembelian MyMETdata', event)">Portal MyMETData</button>
             <button class="lang-btn" onclick="quickAsk('Urusan bayaran', event)">Urusan Bayaran</button>
             <button class="lang-btn" onclick="quickAsk('Walk-in', event)">Urusan Walk-in</button>
-            <button class="lang-btn" onclick="quickAsk('Tempoh data legal & Non-routine', event)">Tempoh Data Legal</button>
+            <button class="lang-btn" onclick="quickAsk('Tempoh data', event)">Tempoh Data </button>
             <button class="lang-btn" onclick="quickAsk('Jenis format data', event)">Jenis & Format Data</button>
             <button class="lang-btn" onclick="quickAsk('Pengecualian yuran & Diskaun pelajar', event)">Pengecualian Fi Pelajar</button>
             <button class="lang-btn" onclick="quickAsk('Prosedur & Dokumen sokongan', event)">Prosedur & Dokumen</button>
@@ -362,7 +362,7 @@ function showFaqOptions(lang) {
             <button class="lang-btn" onclick="quickAsk('myMETdata portal', event)">MyMETData Portal</button>
             <button class="lang-btn" onclick="quickAsk('Payment', event)">Payment Info</button>
             <button class="lang-btn" onclick="quickAsk('Walk-in / Counter services', event)">Walk-in Counter</button>
-            <button class="lang-btn" onclick="quickAsk('Legal & Non-routine data period', event)">Special Data Period</button>
+            <button class="lang-btn" onclick="quickAsk('Data period', event)">Data Period</button>
             <button class="lang-btn" onclick="quickAsk('Data format', event)">Data Types & Format</button>
             <button class="lang-btn" onclick="quickAsk('Fee waivers & Student discount', event)">Student Fee Waiver</button>
             <button class="lang-btn" onclick="quickAsk('Procedures & Required documents', event)">Documents Required</button>
@@ -458,7 +458,7 @@ function saveChatLog(sender, message) {
     localStorage.setItem('chatLogs', JSON.stringify(logs));
 }
 
-const suggestionList = ["Bagaimana cara membeli data?", "Apakah jenis data yang ditawarkan?", "Bagaimana cara membuat bayaran?", "Siapa boleh saya hubungi untuk bantuan?"];
+const suggestionList = ["cara membeli data?", "tempoh data","jenis data yang ditawarkan?", "cara membuat bayaran?", "Siapa boleh saya hubungi untuk bantuan?"];
 const userInputField = document.getElementById("userInput");
 const suggestionBox = document.getElementById("inputSuggestions");
 

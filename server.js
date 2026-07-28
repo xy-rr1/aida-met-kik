@@ -50,7 +50,7 @@ const faqData = [
         answerEN: 'Sir/Madam can come to Floor 3, National Climate Centre, Department of Meteorology Malaysia, 46667 Petaling Jaya, Selangor.'
     },
     {
-        keywords: ['tempoh data', 'data non-routine', 'compiling data', '3 hari bekerja', '7 hari bekerja', 'legal & non-routine data period', 'tempoh data legal & non-routine', 'special data period'],
+        keywords: ['tempoh data', 'data period','data non-routine', 'compiling data', '3 hari bekerja', '7 hari bekerja', 'legal & non-routine data period', 'tempoh data legal & non-routine', 'special data period'],
         answerBM: 'Permohonan bagi kategori berbayar akan diproses dalam tempoh 3 hingga 5 hari bekerja, manakala permohonan kategori remitan / pengecualian bayaran (pelajar/agensi kerajaan) akan diproses dalam tempoh 7 hingga 10 hari bekerja. Data iklim yang dipohon akan dibekalkan dalam tempoh 1 hari bekerja selepas pembayaran diterima.',
         answerEN: 'Applications for the paid category will be processed within 3 to 5 working days, while remittance / fee waiver applications (students/government agencies) will be processed within 7 to 10 working days. Requested climate data will be provided within 1 working day after payment is received.'
     },

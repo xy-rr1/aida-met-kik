@@ -50,7 +50,7 @@ const faqData = [
         answerEN: 'Sir/Madam can come to Floor 3, National Climate Centre, Department of Meteorology Malaysia, 46667 Petaling Jaya, Selangor.'
     },
     {
-        keywords: ['tempoh data legal', 'data non-routine', 'compiling data', '3 hari bekerja', '7 hari bekerja', 'legal & non-routine data period', 'tempoh data legal & non-routine', 'special data period'],
+        keywords: ['tempoh data', 'data non-routine', 'compiling data', '3 hari bekerja', '7 hari bekerja', 'legal & non-routine data period', 'tempoh data legal & non-routine', 'special data period'],
         answerBM: 'Permohonan bagi kategori berbayar akan diproses dalam tempoh 3 hingga 5 hari bekerja, manakala permohonan kategori remitan / pengecualian bayaran (pelajar/agensi kerajaan) akan diproses dalam tempoh 7 hingga 10 hari bekerja. Data iklim yang dipohon akan dibekalkan dalam tempoh 1 hari bekerja selepas pembayaran diterima.',
         answerEN: 'Applications for the paid category will be processed within 3 to 5 working days, while remittance / fee waiver applications (students/government agencies) will be processed within 7 to 10 working days. Requested climate data will be provided within 1 working day after payment is received.'
     },
@@ -65,9 +65,37 @@ const faqData = [
         answerEN: 'In general, a fee waiver may be granted to Government Agencies / researchers or students who are citizens. Kindly register at <a href="https://mymetdata.met.gov.my" target="_blank" class="chat-link">mymetdata.met.gov.my</a> and state \'waiver/exemption\'.'
     },
     {
-        keywords: ['4 dokumen sokongan', 'dokumen pengecualian', 'surat sokongan', 'kad pelajar', 'required documents', 'prosedur & dokumen sokongan', 'procedures & required documents'],
-        answerBM: 'Dokumen yang diperlukan untuk permohonan data Non-Routine:<br>1. Salinan IC & kad pelajar / kad kerja<br>2. Surat sokongan rasmi daripada institusi atau agensi<br>3. Keterangan ringkas mengenai projek/penyelidikan<br>4. Surat pengesahan tiada sebarang tajaan luar',
-        answerEN: 'Required documents for Non-Routine data applications:<br>1. Copy of IC & student / staff card<br>2. Official support letter from the institution or agency<br>3. Brief description of the project/research<br>4. Confirmation letter of no external sponsorship'
+        keywords: ['dokumen sokongan', 'dokumen pengecualian', 'surat sokongan', 'kad pelajar', 'required documents', 'prosedur & dokumen sokongan', 'procedures & required documents', 'dokumen'],
+        answerBM: '<b>Dokumen Sokongan Mengikut Kategori Pemohon:</b><br><br>' +
+                  '<b>1. Pelajar (Sekolah Rendah & Menengah):</b><br>' +
+                  '• Surat sokongan sekolah<br>' +
+                  '• Salinan pengenalan diri<br><br>' +
+                  '<b>2. Mahasiswa (Sijil, Diploma, Ijazah, Master & PhD):</b><br>' +
+                  '• Salinan pengenalan diri & kad pelajar<br>' +
+                  '• Surat sokongan institusi pengajian<br>' +
+                  '• Keterangan projek & pengesahan tiada sebarang tajaan<br><br>' +
+                  '<b>3. Penyelidik:</b><br>' +
+                  '• Salinan pengenalan diri<br>' +
+                  '• Surat sokongan institusi pengajian<br>' +
+                  '• Keterangan projek & pengesahan tiada sebarang tajaan<br><br>' +
+                  '<b>4. Agensi Kerajaan:</b><br>' +
+                  '• Surat pengesahan Jabatan<br>' +
+                  '• Justifikasi permohonan',
+        answerEN: '<b>Supporting Documents by Applicant Category:</b><br><br>' +
+                  '<b>1. Students (Primary & Secondary School):</b><br>' +
+                  '• School support letter<br>' +
+                  '• Copy of identification document (IC/Passport)<br><br>' +
+                  '<b>2. University/College Students (Certificate, Diploma, Degree, Master & PhD):</b><br>' +
+                  '• Copy of identification document & student card<br>' +
+                  '• Support letter from higher education institution<br>' +
+                  '• Project description & confirmation of no sponsorship<br><br>' +
+                  '<b>3. Researchers:</b><br>' +
+                  '• Copy of identification document<br>' +
+                  '• Support letter from higher education institution<br>' +
+                  '• Project description & confirmation of no sponsorship<br><br>' +
+                  '<b>4. Government Agencies:</b><br>' +
+                  '• Department confirmation letter<br>' +
+                  '• Application justification'
     },
     {
         keywords: ['stesen cuaca', 'stesen meteorologi', 'lokasi stesen', 'senarai stesen', 'stesen malaysia', 'stesen di', 'stesen dekat', 'stesen', 'penang', 'pulau pinang', 'kedah', 'perlis', 'ipoh', 'perak', 'selangor', 'kl', 'peta stesen', 'stesen mana', 'paling dekat', 'pahang', 'sabah', 'sarawak', 'johor', 'kelantan', 'terengganu', 'melaka', 'negeri sembilan'],
@@ -86,11 +114,17 @@ const faqData = [
     }
 ];
 
+/* ================================================================
+   FUNGSI SEMAKAN FAQ (DIBETULKAN & DIKETATKAN MOD BAHASA)
+   ================================================================ */
 function checkFAQ(message, lang) {
     const text = message.toLowerCase().trim();
+    // Tukar lang ke huruf besar supaya kalis 'en', 'EN', atau 'En'
+    const isEnglish = (String(lang).toUpperCase() === 'EN');
+
     for (const faq of faqData) {
         if (faq.keywords.some(k => text === k.toLowerCase() || text.includes(k.toLowerCase()))) {
-            return lang === 'EN' ? faq.answerEN : faq.answerBM;
+            return isEnglish ? faq.answerEN : faq.answerBM;
         }
     }
     return null;
@@ -111,7 +145,7 @@ app.post("/chat", async (req, res) => {
     try {
         let promptSystem = "";
 
-        if (lang === 'EN') {
+        if (String(lang).toUpperCase() === 'EN') {
             promptSystem = `You are AIDA, the official AI Chatbot for the Malaysian Meteorological Department (MET Malaysia). The current year is 2026.
 
             Please use the official department knowledge data below to answer the user's question accurately:
@@ -168,7 +202,7 @@ app.post("/chat", async (req, res) => {
             aiReply = data.choices[0].message.content;
         } else {
             console.log("\n[RALAT GROQ API]:", JSON.stringify(data, null, 2)); 
-            aiReply = (lang === 'EN' 
+            aiReply = (String(lang).toUpperCase() === 'EN' 
                 ? "I'm sorry, I could not process that request. Connection issue." 
                 : "Maaf, saya tidak dapat memproses permintaan tersebut. Sila cuba sebentar lagi.");
         }
@@ -178,7 +212,7 @@ app.post("/chat", async (req, res) => {
     } catch (error) {
         console.error("Ralat Blok Try-Catch Back-end:", error);
         res.json({ 
-            reply: lang === 'EN' ? "Connection error to AI system." : "Ralat sambungan ke sistem AI.", 
+            reply: String(lang).toUpperCase() === 'EN' ? "Connection error to AI system." : "Ralat sambungan ke sistem AI.", 
             source: "error" 
         });
     }

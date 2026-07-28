@@ -396,7 +396,7 @@ function addMessage(text, sender) {
 
     saveChatLog(sender, text);
 
-    // 💡 LOGIK PETA KEBANGSAAN LEAFLET (STESEN UTAMA & STESEN AUKISILIARI)
+    // 💡 LOGIK PETA KEBANGSAAN LEAFLET (STESEN UTAMA & STESEN AUKISILIARI MODEN BULATAN)
     if (text.includes('id="leafletMap"')) {
         setTimeout(() => {
             try {
@@ -491,25 +491,29 @@ function addMessage(text, sender) {
                     attribution: '© OpenStreetMap'
                 }).addTo(map);
 
-                // 🔴 Ikon Merah Khas untuk Stesen Auksiliari
-                const redIcon = L.icon({
-                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                    iconSize: [25, 41],
-                    iconAnchor: [12, 41],
-                    popupAnchor: [1, -34],
-                    shadowSize: [41, 41]
-                });
-
-                // 3. Masukkan Marker Stesen Utama (Pin Biru Standar)
+                // 🔵 3. Masukkan Marker Stesen UTAMA (Bulatan Biru Sederhana)
                 stations.forEach(st => {
-                    L.marker([st.lat, st.lng]).addTo(map)
+                    L.circleMarker([st.lat, st.lng], {
+                        radius: 6,
+                        fillColor: "#0056b3",
+                        color: "#ffffff",
+                        weight: 2,
+                        opacity: 1,
+                        fillOpacity: 0.9
+                    }).addTo(map)
                         .bindPopup(`<b>${st.name}</b><br><span style="color:blue;"><b>Kategori: Stesen Utama</b></span><br>Negeri: ${st.state ? st.state.toUpperCase() : 'MALAYSIA'}`);
                 });
 
-                // 4. Masukkan Marker Stesen Auksiliari (Pin Merah)
+                // 🔴 4. Masukkan Marker Stesen AUKISILIARI (Bulatan Merah Kecil Comel)
                 auxiliaryStations.forEach(st => {
-                    L.marker([st.lat, st.lng], { icon: redIcon }).addTo(map)
+                    L.circleMarker([st.lat, st.lng], {
+                        radius: 4,
+                        fillColor: "#dc3545",
+                        color: "#ffffff",
+                        weight: 1,
+                        opacity: 1,
+                        fillOpacity: 0.8
+                    }).addTo(map)
                         .bindPopup(`<b>${st.name}</b><br><span style="color:red;"><b>Kategori: Stesen Auksiliari</b></span>`);
                 });
 

@@ -396,7 +396,7 @@ function addMessage(text, sender) {
 
     saveChatLog(sender, text);
 
-// 💡 LOGIK PETA KEBANGSAAN LEAFLET (STESEN UTAMA, AUKISILIARI & KOTAK CARIAN)
+    // 💡 LOGIK PETA KEBANGSAAN LEAFLET (STESEN UTAMA, AUKISILIARI & KOTAK CARIAN)
     if (text.includes('id="leafletMap"')) {
         setTimeout(() => {
             try {
@@ -494,7 +494,7 @@ function addMessage(text, sender) {
 
                 // 🔍 4. FUNGSI CARIAN NAMA STESEN DALAM PETA
                 const mapContainer = document.getElementById(uniqueMapId);
-                const searchInput = mapContainer.parentElement.querySelector('.map-search-input');
+                const searchInput = mapContainer ? mapContainer.parentElement.querySelector('.map-search-input') : null;
 
                 if (searchInput) {
                     searchInput.addEventListener('input', function () {
@@ -516,6 +516,7 @@ function addMessage(text, sender) {
                 console.error("Gagal memaparkan peta:", mapError);
             }
         }, 400); 
+    } // 👈 PENUTUP if(text.includes) DITAMBAH DI SINI
 }
 
 function setLanguage(lang, event) {
@@ -708,51 +709,55 @@ const suggestionList = ["cara membeli data?", "tempoh data", "jenis data yang di
 const userInputField = document.getElementById("userInput");
 const suggestionBox = document.getElementById("inputSuggestions");
 
-userInputField.addEventListener("input", function () {
-    // 💡 KUNCI UTAMA: Sebaik sahaja juri atau user tekan satu huruf pun dekat keyboard, 
-    // kita terus padam timer 5 saat bot! Bot akan senyap dan tunggu user habis menaip.
-    clearTimeout(followUpTimeout);
+if (userInputField) {
+    userInputField.addEventListener("input", function () {
+        // 💡 KUNCI UTAMA: Sebaik sahaja juri atau user tekan satu huruf pun dekat keyboard, 
+        // kita terus padam timer 5 saat bot! Bot akan senyap dan tunggu user habis menaip.
+        clearTimeout(followUpTimeout);
 
-    // Sekatan: Matikan fungsi auto-suggest kalau data peribadi masih dalam proses kutipan
-    if (chatStage !== 'COMPLETED' && chatStage !== 'GREETING') return;
+        // Sekatan: Matikan fungsi auto-suggest kalau data peribadi masih dalam proses kutipan
+        if (chatStage !== 'COMPLETED' && chatStage !== 'GREETING') return;
 
-    const text = this.value.toLowerCase().trim();
-    suggestionBox.innerHTML = "";
-    if (text.length < 2) return;
+        const text = this.value.toLowerCase().trim();
+        if (suggestionBox) suggestionBox.innerHTML = "";
+        if (text.length < 2) return;
 
-    const scoredMatches = suggestionList
-        .map(q => {
-            let score = 0;
-            q.toLowerCase().split(' ').forEach(word => { if (text.includes(word)) score++; });
-            return { text: q, score };
-        })
-        .filter(item => item.score > 0)
-        .sort((a, b) => b.score - a.score)
-        .slice(0, 4);
+        const scoredMatches = suggestionList
+            .map(q => {
+                let score = 0;
+                q.toLowerCase().split(' ').forEach(word => { if (text.includes(word)) score++; });
+                return { text: q, score };
+            })
+            .filter(item => item.score > 0)
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 4);
 
-    scoredMatches.forEach((item, index) => {
-        const div = document.createElement("div");
-        div.className = "suggestion-item";
-        div.textContent = item.text;
-        if (index === 0) { div.style.backgroundColor = "#003366"; div.style.color = "#fff"; }
-        div.onclick = (e) => {
-            e.stopPropagation();
-            userInputField.value = item.text;
-            suggestionBox.innerHTML = "";
-            sendMessage();
-        };
-        suggestionBox.appendChild(div);
+        scoredMatches.forEach((item, index) => {
+            const div = document.createElement("div");
+            div.className = "suggestion-item";
+            div.textContent = item.text;
+            if (index === 0) { div.style.backgroundColor = "#003366"; div.style.color = "#fff"; }
+            div.onclick = (e) => {
+                e.stopPropagation();
+                userInputField.value = item.text;
+                if (suggestionBox) suggestionBox.innerHTML = "";
+                sendMessage();
+            };
+            if (suggestionBox) suggestionBox.appendChild(div);
+        });
     });
-});
 
-userInputField.addEventListener("blur", () => { setTimeout(() => suggestionBox.innerHTML = "", 200); });
+    userInputField.addEventListener("blur", () => { 
+        setTimeout(() => { if (suggestionBox) suggestionBox.innerHTML = ""; }, 200); 
+    });
 
-userInputField.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        sendMessage();
-    }
-});
+    userInputField.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+}
 
 document.addEventListener('click', function(e) {
     const chatbox = document.getElementById('chatbox');

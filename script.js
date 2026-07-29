@@ -240,7 +240,7 @@ const auxiliaryStations = [
     { "name": "Stesen Auksiliari Stesen Pertanian Serian", "lat": 1.1719, "lng": 110.5694 },
     { "name": "Stesen Auksiliari Stesen Pertanian Lubok Antu", "lat": 1.0408, "lng": 111.8328 },
     { "name": "Stesen Auksiliari Stesen Pertanian Betong", "lat": 1.4111, "lng": 111.5283 },
-    { "name": "Stesen Auksiliari Stesen Pertanian Mukah", "lat": 2.8986, "lng": 112.0911 },
+    { "name": "Stesen Auksiliari Stesen Pertanian Mukah", "lat": 2.8895, "lng": 112.0911 },
     { "name": "Stesen Auksiliari Stesen Pertanian Kanowit", "lat": 2.1039, "lng": 112.1558 },
     { "name": "Stesen Auksiliari Stesen Pertanian Bintulu", "lat": 3.2081, "lng": 113.0886 },
     { "name": "Stesen Auksiliari Stesen Pertanian Tatau", "lat": 2.8767, "lng": 112.8600 },
@@ -516,7 +516,7 @@ function addMessage(text, sender) {
                 console.error("Gagal memaparkan peta:", mapError);
             }
         }, 400); 
-    } // 👈 PENUTUP if(text.includes) DITAMBAH DI SINI
+    }
 }
 
 function setLanguage(lang, event) {
@@ -696,7 +696,7 @@ async function botReply(userMessage) {
 }
 
 // ================================================================
-// 4. PENYIMPANAN DATA & AUTO-SUGGEST
+// 4. PENYIMPANAN DATA & INPUT ENTER
 // ================================================================
 
 function saveChatLog(sender, message) {
@@ -705,52 +705,9 @@ function saveChatLog(sender, message) {
     localStorage.setItem('chatLogs', JSON.stringify(logs));
 }
 
-const suggestionList = ["cara membeli data?", "tempoh data", "jenis data yang ditawarkan?", "cara membuat bayaran?", "Siapa boleh saya hubungi untuk bantuan?"];
 const userInputField = document.getElementById("userInput");
-const suggestionBox = document.getElementById("inputSuggestions");
 
 if (userInputField) {
-    userInputField.addEventListener("input", function () {
-        // 💡 KUNCI UTAMA: Sebaik sahaja juri atau user tekan satu huruf pun dekat keyboard, 
-        // kita terus padam timer 5 saat bot! Bot akan senyap dan tunggu user habis menaip.
-        clearTimeout(followUpTimeout);
-
-        // Sekatan: Matikan fungsi auto-suggest kalau data peribadi masih dalam proses kutipan
-        if (chatStage !== 'COMPLETED' && chatStage !== 'GREETING') return;
-
-        const text = this.value.toLowerCase().trim();
-        if (suggestionBox) suggestionBox.innerHTML = "";
-        if (text.length < 2) return;
-
-        const scoredMatches = suggestionList
-            .map(q => {
-                let score = 0;
-                q.toLowerCase().split(' ').forEach(word => { if (text.includes(word)) score++; });
-                return { text: q, score };
-            })
-            .filter(item => item.score > 0)
-            .sort((a, b) => b.score - a.score)
-            .slice(0, 4);
-
-        scoredMatches.forEach((item, index) => {
-            const div = document.createElement("div");
-            div.className = "suggestion-item";
-            div.textContent = item.text;
-            if (index === 0) { div.style.backgroundColor = "#003366"; div.style.color = "#fff"; }
-            div.onclick = (e) => {
-                e.stopPropagation();
-                userInputField.value = item.text;
-                if (suggestionBox) suggestionBox.innerHTML = "";
-                sendMessage();
-            };
-            if (suggestionBox) suggestionBox.appendChild(div);
-        });
-    });
-
-    userInputField.addEventListener("blur", () => { 
-        setTimeout(() => { if (suggestionBox) suggestionBox.innerHTML = ""; }, 200); 
-    });
-
     userInputField.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             e.preventDefault();

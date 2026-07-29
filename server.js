@@ -30,7 +30,7 @@ const faqData = [
         answerEN: 'MET Malaysia counter operating hours are as follows:<br><br><b>Monday - Thursday:</b><br>• 8:00 AM - 1:00 PM<br>• 2:00 PM - 4:00 PM<br><br><b>Friday:</b><br>• 8:00 AM - 12:00 PM<br>• 3:00 PM - 4:00 PM<br><br><i>*Closed on Saturdays, Sundays & Public Holidays.</i>'
     },
     {
-        // 💡 Perkataan umum 'lokasi' & 'alamat' dibuang supaya tak pintas carian daerah/stesen dekat pengguna
+        // 💡 Hanya keyword khusus alamat HQ dipadankan supaya tak pintas soalan daerah/stesen pengguna
         keywords: ['alamat jabatan', 'lokasi jabatan', 'di mana met', 'alamat met', 'jalan sultan', 'department address', 'met location', 'alamat pejabat', 'lokasi pejabat'],
         answerBM: 'Jabatan Meteorologi Malaysia, Jalan Sultan, 46667 Petaling Jaya, Selangor Darul Ehsan.',
         answerEN: 'Jabatan Meteorologi Malaysia, Jalan Sultan, 46667 Petaling Jaya, Selangor Darul Ehsan.'
@@ -99,8 +99,7 @@ const faqData = [
                   '• Application justification'
     },
     {
-        // 💡 Keywords diperluaskan termasuk carian lokasi paling dekat & daerah khas
-        keywords: ['stesen cuaca', 'stesen meteorologi', 'lokasi stesen', 'senarai stesen', 'stesen malaysia', 'stesen di', 'stesen dekat', 'stesen', 'penang', 'pulau pinang', 'kedah', 'perlis', 'ipoh', 'perak', 'selangor', 'kl', 'peta stesen', 'stesen mana', 'paling dekat', 'stesen paling dekat', 'lokasi saya', 'baling', 'pahang', 'sabah', 'sarawak', 'johor', 'kelantan', 'terengganu', 'melaka', 'negeri sembilan'],
+        keywords: ['stesen cuaca', 'stesen meteorologi', 'lokasi stesen', 'senarai stesen', 'stesen malaysia', 'stesen di', 'stesen dekat', 'peta stesen', 'stesen mana', 'paling dekat', 'stesen paling dekat', 'lokasi saya'],
         answerBM: 'Berikut ialah peta interaktif stesen meteorologi di Malaysia bagi kawasan yang anda cari:<br><br>' +
                   '<b>Petunjuk Peta:</b><br>' +
                   '🔵 <b>Biru:</b> Stesen Utama | 🔴 <b>Merah:</b> Stesen Auksiliari<br><br>' +

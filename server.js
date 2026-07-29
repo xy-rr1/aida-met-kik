@@ -30,7 +30,8 @@ const faqData = [
         answerEN: 'MET Malaysia counter operating hours are as follows:<br><br><b>Monday - Thursday:</b><br>• 8:00 AM - 1:00 PM<br>• 2:00 PM - 4:00 PM<br><br><b>Friday:</b><br>• 8:00 AM - 12:00 PM<br>• 3:00 PM - 4:00 PM<br><br><i>*Closed on Saturdays, Sundays & Public Holidays.</i>'
     },
     {
-        keywords: ['alamat jabatan', 'lokasi jabatan', 'di mana met', 'alamat met', 'jalan sultan', 'department address', 'met location', 'alamat pejabat', 'lokasi pejabat', 'alamat', 'lokasi'],
+        // 💡 Perkataan umum 'lokasi' & 'alamat' dibuang supaya tak pintas carian daerah/stesen dekat pengguna
+        keywords: ['alamat jabatan', 'lokasi jabatan', 'di mana met', 'alamat met', 'jalan sultan', 'department address', 'met location', 'alamat pejabat', 'lokasi pejabat'],
         answerBM: 'Jabatan Meteorologi Malaysia, Jalan Sultan, 46667 Petaling Jaya, Selangor Darul Ehsan.',
         answerEN: 'Jabatan Meteorologi Malaysia, Jalan Sultan, 46667 Petaling Jaya, Selangor Darul Ehsan.'
     },
@@ -97,8 +98,9 @@ const faqData = [
                   '• Department confirmation letter<br>' +
                   '• Application justification'
     },
-   {
-        keywords: ['stesen cuaca', 'stesen meteorologi', 'lokasi stesen', 'senarai stesen', 'stesen malaysia', 'stesen di', 'stesen dekat', 'stesen', 'penang', 'pulau pinang', 'kedah', 'perlis', 'ipoh', 'perak', 'selangor', 'kl', 'peta stesen', 'stesen mana', 'paling dekat', 'pahang', 'sabah', 'sarawak', 'johor', 'kelantan', 'terengganu', 'melaka', 'negeri sembilan'],
+    {
+        // 💡 Keywords diperluaskan termasuk carian lokasi paling dekat & daerah khas
+        keywords: ['stesen cuaca', 'stesen meteorologi', 'lokasi stesen', 'senarai stesen', 'stesen malaysia', 'stesen di', 'stesen dekat', 'stesen', 'penang', 'pulau pinang', 'kedah', 'perlis', 'ipoh', 'perak', 'selangor', 'kl', 'peta stesen', 'stesen mana', 'paling dekat', 'stesen paling dekat', 'lokasi saya', 'baling', 'pahang', 'sabah', 'sarawak', 'johor', 'kelantan', 'terengganu', 'melaka', 'negeri sembilan'],
         answerBM: 'Berikut ialah peta interaktif stesen meteorologi di Malaysia bagi kawasan yang anda cari:<br><br>' +
                   '<b>Petunjuk Peta:</b><br>' +
                   '🔵 <b>Biru:</b> Stesen Utama | 🔴 <b>Merah:</b> Stesen Auksiliari<br><br>' +
@@ -118,11 +120,10 @@ const faqData = [
 ];
 
 /* ================================================================
-   FUNGSI SEMAKAN FAQ (DIBETULKAN & DIKETATKAN MOD BAHASA)
+   FUNGSI SEMAKAN FAQ
    ================================================================ */
 function checkFAQ(message, lang) {
     const text = message.toLowerCase().trim();
-    // Tukar lang ke huruf besar supaya kalis 'en', 'EN', atau 'En'
     const isEnglish = (String(lang).toUpperCase() === 'EN');
 
     for (const faq of faqData) {
@@ -161,7 +162,7 @@ app.post("/chat", async (req, res) => {
                - Paragraph 2: The relevance/importance of the topic within the context of services, monitoring, or warnings by MET Malaysia.
                - Paragraph 3: A friendly follow-up closing question at the end (e.g., "Would you like to know more about...").
             3. It is STRICTLY FORBIDDEN to mention the words "JSON", "database", "provided file", "knowledgeData", or "information from JSON" in your response. Act as if you naturally know all this information.
-            4. LANGUAGE RULE: You MUST reply 100% in ENGLISH. Do not mix languages or use Malay words.
+            4. LANGUAGE RULE: You MUST reply 100% in ENGLISH. Do not mix languages or use Malay words. Avoid awkward direct translations.
             5. If the user's question is about weather stations, locations, or states, advise them to type "Weather station" to view the Interactive Map.
             6. If the user's question is completely unrelated to MET Malaysia's scope or meteorology, politely state that you are only trained for the department's scope.`;
         } else {
@@ -177,7 +178,7 @@ app.post("/chat", async (req, res) => {
                - Perenggan 2: Kaitan/kepentingan topik tersebut dalam konteks perkhidmatan, pemantauan, atau amaran oleh MET Malaysia.
                - Perenggan 3: Soalan ramah pembuka bicara di hujung jawapan (Contoh: "Adakah anda ingin tahu lebih lanjut mengenai...").
             3. HARAM dan DILARANG SAMA SEKALI menyebut perkataan "JSON", "pangkalan data", "fail yang diberikan", "knowledgeData", atau "maklumat dari JSON" dalam jawapan anda. Berlakon seolah-olah anda memang sudah tahu semua maklumat ini secara semula jadi.
-            4. PERATURAN BAHASA: Anda WAJIB menjawab 100% dalam BAHASA MALAYSIA yang profesional tanpa bercampur bahasa.
+            4. PERATURAN BAHASA: Anda WAJIB menjawab 100% dalam BAHASA MALAYSIA yang profesional. DILARANG menggunakan terjemahan langsung yang janggal seperti "Selamat hari" (gunakan "Semoga hari anda menyenangkan" atau "Selamat sejahtera").
             5. Sekiranya soalan pengguna berkaitan lokasi, stesen cuaca, atau daerah, nasihatkan pengguna untuk menaip "Stesen cuaca" untuk melihat Peta Interaktif.
             6. Sekiranya soalan pengguna tidak berkaitan dengan skop MET Malaysia atau meteorologi, jawab dengan sopan bahawa anda hanya dilatih untuk skop jabatan sahaja.`;
         }

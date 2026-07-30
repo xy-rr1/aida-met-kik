@@ -40,7 +40,7 @@ const faqData = [
         answerEN: 'You can purchase data online at the MyMETData Portal via <a href="https://mymetdata.met.gov.my" target="_blank" class="chat-link">mymetdata.met.gov.my</a>.'
     },
     {
-        keywords: ['urusan bayar', 'transaksi pembayaran', 'pending for payment', 'maybank2u', 'cimb clicks', 'payment transactions', 'payment'],
+        keywords: ['urusan bayar', 'urusan bayar','urusan bayaran', 'payment info', 'transaksi pembayaran', 'pending for payment', 'maybank2u', 'cimb clicks', 'payment transactions', 'payment'],
         answerBM: 'Bayaran boleh dibuat melalui maybank2u, bank draf atau wang pos.',
         answerEN: 'Payment can be made via Maybank2u, bank draft, or postal order.'
     },
@@ -127,7 +127,7 @@ const faqData = [
 ];
 
 /* ================================================================
-   FUNGSI SEMAKAN FAQ (PENGECAMAN REGEX REGULAR EXPRESSION)
+   FUNGSI SEMAKAN FAQ (DIPERBAIKI DENGAN PADANAN FLEKSIBEL & REGEX)
    ================================================================ */
 function checkFAQ(message, lang) {
     const text = message.toLowerCase().trim();
@@ -135,7 +135,13 @@ function checkFAQ(message, lang) {
 
     for (const faq of faqData) {
         if (faq.keywords.some(k => {
-            const pattern = new RegExp(`\\b${k.toLowerCase()}\\b`, 'i');
+            const cleanK = k.toLowerCase().trim();
+            // 💡 Semakan 1: Jika mesej pengguna mengandungi kata kunci secara terus
+            if (text.includes(cleanK) || cleanK.includes(text)) {
+                return true;
+            }
+            // 💡 Semakan 2: Regex Word Boundary
+            const pattern = new RegExp(`\\b${cleanK}\\b`, 'i');
             return pattern.test(text);
         })) {
             return isEnglish ? faq.answerEN : faq.answerBM;

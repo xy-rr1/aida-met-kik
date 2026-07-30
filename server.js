@@ -99,6 +99,7 @@ const faqData = [
                   '• Application justification'
     },
     {
+        // 💡 Nama-nama negeri dibuang dari sini supaya tidak memintas carian lokasi daerah dalam script.js
         keywords: ['stesen cuaca', 'stesen meteorologi', 'lokasi stesen', 'senarai stesen', 'stesen malaysia', 'stesen di', 'stesen dekat', 'peta stesen', 'stesen mana', 'paling dekat', 'stesen paling dekat', 'lokasi saya'],
         answerBM: 'Berikut ialah peta interaktif stesen meteorologi di Malaysia bagi kawasan yang anda cari:<br><br>' +
                   '<b>Petunjuk Peta:</b><br>' +
@@ -119,14 +120,17 @@ const faqData = [
 ];
 
 /* ================================================================
-   FUNGSI SEMAKAN FAQ
+   FUNGSI SEMAKAN FAQ (DIPERBAIKI UNTUK PENGECAMAN REGEX)
    ================================================================ */
 function checkFAQ(message, lang) {
     const text = message.toLowerCase().trim();
     const isEnglish = (String(lang).toUpperCase() === 'EN');
 
     for (const faq of faqData) {
-        if (faq.keywords.some(k => text === k.toLowerCase() || text.includes(k.toLowerCase()))) {
+        if (faq.keywords.some(k => {
+            const pattern = new RegExp(`\\b${k.toLowerCase()}\\b`, 'i');
+            return pattern.test(text);
+        })) {
             return isEnglish ? faq.answerEN : faq.answerBM;
         }
     }

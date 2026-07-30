@@ -30,7 +30,6 @@ const faqData = [
         answerEN: 'MET Malaysia counter operating hours are as follows:<br><br><b>Monday - Thursday:</b><br>• 8:00 AM - 1:00 PM<br>• 2:00 PM - 4:00 PM<br><br><b>Friday:</b><br>• 8:00 AM - 12:00 PM<br>• 3:00 PM - 4:00 PM<br><br><i>*Closed on Saturdays, Sundays & Public Holidays.</i>'
     },
     {
-        // 💡 Hanya keyword khusus alamat HQ dipadankan supaya tak pintas soalan daerah/stesen pengguna
         keywords: ['alamat jabatan', 'lokasi jabatan', 'di mana met', 'alamat met', 'jalan sultan', 'department address', 'met location', 'alamat pejabat', 'lokasi pejabat'],
         answerBM: 'Jabatan Meteorologi Malaysia, Jalan Sultan, 46667 Petaling Jaya, Selangor Darul Ehsan.',
         answerEN: 'Jabatan Meteorologi Malaysia, Jalan Sultan, 46667 Petaling Jaya, Selangor Darul Ehsan.'
@@ -99,17 +98,25 @@ const faqData = [
                   '• Application justification'
     },
     {
-        // 💡 Nama-nama negeri dibuang dari sini supaya tidak memintas carian lokasi daerah dalam script.js
+        // 💡 TEMPLAT UI BARU: Input Lokasi + Butang Cari + Kotak Jawapan Stesen Terdekat + Peta Interaktif
         keywords: ['stesen cuaca', 'stesen meteorologi', 'lokasi stesen', 'senarai stesen', 'stesen malaysia', 'stesen di', 'stesen dekat', 'peta stesen', 'stesen mana', 'paling dekat', 'stesen paling dekat', 'lokasi saya'],
-        answerBM: 'Berikut ialah peta interaktif stesen meteorologi di Malaysia bagi kawasan yang anda cari:<br><br>' +
-                  '<b>Petunjuk Peta:</b><br>' +
-                  '🔵 <b>Biru:</b> Stesen Utama | 🔴 <b>Merah:</b> Stesen Auksiliari<br><br>' +
-                  '<input type="text" class="map-search-input" placeholder="🔍 Cari nama stesen..." style="width:100%; padding:6px 10px; margin-bottom:8px; border-radius:6px; border:1px solid #ccc; font-size:12px; box-sizing:border-box;">' +
+        answerBM: '<b>📍 Carian Stesen Cuaca Terdekat</b><br><br>' +
+                  '<div style="display:flex; gap:6px; margin-bottom:8px;">' +
+                      '<input type="text" class="user-location-input" placeholder="Masukkan lokasi/daerah anda..." style="flex:1; padding:6px 10px; border-radius:6px; border:1px solid #ccc; font-size:12px; box-sizing:border-box;">' +
+                      '<button class="search-station-btn" onclick="findNearestStation(this)" style="padding:6px 12px; background:#0056b3; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:bold; cursor:pointer;">Cari</button>' +
+                  '</div>' +
+                  '<div class="nearest-result-box" style="display:none; padding:8px 10px; background:#e7f3ff; border-left:4px solid #0056b3; border-radius:4px; margin-bottom:8px; font-size:12px; color:#004085;">' +
+                      '<b>Stesen Terdekat:</b> <span class="nearest-station-name">-</span>' +
+                  '</div>' +
                   '<div id="leafletMap" style="width: 100%; height: 220px; border-radius: 8px; border: 1px solid #ccc;"></div>',
-        answerEN: 'Here is the interactive map of meteorological stations in Malaysia for the area you searched for:<br><br>' +
-                  '<b>Map Legend:</b><br>' +
-                  '🔵 <b>Blue:</b> Main Station | 🔴 <b>Red:</b> Auxiliary Station<br><br>' +
-                  '<input type="text" class="map-search-input" placeholder="🔍 Search station name..." style="width:100%; padding:6px 10px; margin-bottom:8px; border-radius:6px; border:1px solid #ccc; font-size:12px; box-sizing:border-box;">' +
+        answerEN: '<b>📍 Nearest Weather Station Search</b><br><br>' +
+                  '<div style="display:flex; gap:6px; margin-bottom:8px;">' +
+                      '<input type="text" class="user-location-input" placeholder="Enter your location/district..." style="flex:1; padding:6px 10px; border-radius:6px; border:1px solid #ccc; font-size:12px; box-sizing:border-box;">' +
+                      '<button class="search-station-btn" onclick="findNearestStation(this)" style="padding:6px 12px; background:#0056b3; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:bold; cursor:pointer;">Search</button>' +
+                  '</div>' +
+                  '<div class="nearest-result-box" style="display:none; padding:8px 10px; background:#e7f3ff; border-left:4px solid #0056b3; border-radius:4px; margin-bottom:8px; font-size:12px; color:#004085;">' +
+                      '<b>Nearest Station:</b> <span class="nearest-station-name">-</span>' +
+                  '</div>' +
                   '<div id="leafletMap" style="width: 100%; height: 220px; border-radius: 8px; border: 1px solid #ccc;"></div>'
     },
     {
@@ -120,7 +127,7 @@ const faqData = [
 ];
 
 /* ================================================================
-   FUNGSI SEMAKAN FAQ (DIPERBAIKI UNTUK PENGECAMAN REGEX)
+   FUNGSI SEMAKAN FAQ (PENGECAMAN REGEX REGULAR EXPRESSION)
    ================================================================ */
 function checkFAQ(message, lang) {
     const text = message.toLowerCase().trim();

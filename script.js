@@ -3,10 +3,9 @@
 // ================================================================
 let currentLang = 'BM'; 
 let followUpTimeout; // 💡 Simpan ID masa di sini supaya boleh dipadam dari mana-mana fungsi
-let lastUserQuery = ''; // 💡 DIKEMASKINI: Simpan mesej terkini pengguna untuk penentuan lokasi peta secara tepat
+let lastUserQuery = ''; // 💡 Simpan mesej terkini pengguna
 
 // 📋 Kunci Mod Pendaftaran 1-by-1
-// Tahap stage: 'GREETING', 'AWAITING_NAME', 'AWAITING_PHONE', 'AWAITING_EMAIL', 'COMPLETED'
 let chatStage = 'GREETING'; 
 let userData = {
     name: '',
@@ -254,6 +253,84 @@ const auxiliaryStations = [
     { "name": "Stesen Auksiliari Stesen MARDI Sessang", "lat": 1.9167, "lng": 111.2167 }
 ];
 
+// 📐 FUNGSI MATEMATIK: Mengira jarak sebenar antara 2 koordinat (Haversine Formula dalam KM)
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Jejari bumi dalam KM
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Hasil jarak dalam KM
+}
+
+// 🔍 FUNGSI TERAS CARIAN: Mencari stesen terdekat (Utama/Auksiliari) apabila pengguna menekan butang 'Cari'
+function findNearestStation(btnElement) {
+    const parentContainer = btnElement.parentElement.parentElement;
+    const locationInput = parentContainer.querySelector('.user-location-input');
+    const resultBox = parentContainer.querySelector('.nearest-result-box');
+    const stationNameSpan = parentContainer.querySelector('.nearest-station-name');
+    
+    const query = locationInput.value.toLowerCase().trim();
+    if (!query) {
+        alert("Sila masukkan lokasi atau daerah anda terlebih dahulu.");
+        return;
+    }
+
+    // 1. Dapatkan rujukan peta Leaflet daripada div peta
+    const mapDiv = parentContainer.querySelector('[id^="map_"]');
+    if (!mapDiv || !mapDiv._leaflet_map) return;
+    const map = mapDiv._leaflet_map;
+    const allMarkers = mapDiv._all_markers_data || [];
+
+    // 2. Tentukan koordinat rujukan lokasi pengguna berdasarkan kata kunci lokasi
+    let userLat = 4.2105, userLng = 101.9758; // Default Pusat Semenanjung
+
+    if (query.includes("jasin")) { userLat = 2.3100; userLng = 102.4300; }
+    else if (query.includes("mersing")) { userLat = 2.4450; userLng = 103.8333; }
+    else if (query.includes("pasir mas") || query.includes("pasirmas")) { userLat = 6.0400; userLng = 102.1400; }
+    else if (query.includes("shah alam")) { userLat = 3.0730; userLng = 101.5180; }
+    else if (query.includes("baling")) { userLat = 5.6792; userLng = 100.9167; }
+    else if (query.includes("melaka")) { userLat = 2.1900; userLng = 102.2500; }
+    else if (query.includes("johor") || query.includes("jb") || query.includes("senai")) { userLat = 1.6333; userLng = 103.6667; }
+    else if (query.includes("kelantan") || query.includes("kota bharu")) { userLat = 6.1250; userLng = 102.2400; }
+    else if (query.includes("kedah") || query.includes("alor setar")) { userLat = 6.1200; userLng = 100.3600; }
+    else if (query.includes("perlis") || query.includes("kangar")) { userLat = 6.4410; userLng = 100.1980; }
+    else if (query.includes("penang") || query.includes("pulau pinang") || query.includes("george town")) { userLat = 5.4140; userLng = 100.3290; }
+    else if (query.includes("ipoh") || query.includes("perak")) { userLat = 4.5970; userLng = 101.0900; }
+    else if (query.includes("selangor") || query.includes("kl") || query.includes("kuala lumpur")) { userLat = 3.0730; userLng = 101.5180; }
+    else if (query.includes("seremban") || query.includes("negeri sembilan")) { userLat = 2.7290; userLng = 101.9380; }
+    else if (query.includes("kuantan") || query.includes("pahang")) { userLat = 3.8080; userLng = 103.3260; }
+    else if (query.includes("kuala terengganu") || query.includes("terengganu")) { userLat = 5.3300; userLng = 103.1400; }
+    else if (query.includes("labuan")) { userLat = 5.3075; userLng = 115.2425; }
+    else if (query.includes("kota kinabalu") || query.includes("sabah")) { userLat = 5.9800; userLng = 116.0700; }
+    else if (query.includes("kuching") || query.includes("sarawak")) { userLat = 1.5530; userLng = 110.3590; }
+
+    // 3. Bandingkan jarak dengan kesemua stesen (Utama ATAU Auksiliari)
+    let nearestStation = null;
+    let minDistance = Infinity;
+
+    allMarkers.forEach(st => {
+        const dist = calculateDistance(userLat, userLng, st.lat, st.lng);
+        if (dist < minDistance) {
+            minDistance = dist;
+            nearestStation = st;
+        }
+    });
+
+    // 4. Paparkan keputusan stesen terdekat & animasikan peta ke stesen tersebut
+    if (nearestStation) {
+        resultBox.style.display = 'block';
+        const typeTag = nearestStation.isMain ? '<b style="color:blue;">[Stesen Utama]</b>' : '<b style="color:red;">[Stesen Auksiliari]</b>';
+        stationNameSpan.innerHTML = `${nearestStation.rawName} ${typeTag} <br><small>📍 Jarak anggaran: <b>${minDistance.toFixed(1)} km</b> dari lokasi anda</small>`;
+        
+        // FlyTo & Buka Popup Stesen Terdekat
+        map.flyTo([nearestStation.lat, nearestStation.lng], 13, { duration: 1.2 });
+        nearestStation.marker.openPopup();
+    }
+}
+
 // ================================================================
 // 1. FUNGSI TERAS CHAT (Toggle, Send, Add Message)
 // ================================================================
@@ -293,7 +370,7 @@ function sendMessage() {
     const message = input.value.trim();
     if (!message) return;
 
-    // 💡 DIKEMASKINI: Simpan soalan pengguna terkini secara terus ke dalam pemboleh ubah global
+    // Simpan soalan pengguna terkini
     lastUserQuery = message.toLowerCase();
 
     // Papar mesej user pada skrin sembang
@@ -385,7 +462,6 @@ function addMessage(text, sender) {
     const timeString = now.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
 
     // 💡 GENERASI ID UNIK: Setiap kali bot reply peta, kita bagi ID unik (cth: map_17182928) 
-    // supaya Leaflet tak berebut ID map lama yang dah wujud!
     const uniqueMapId = "map_" + new Date().getTime();
     let formattedText = text;
     if (text.includes('id="leafletMap"')) {
@@ -400,7 +476,7 @@ function addMessage(text, sender) {
 
     saveChatLog(sender, text);
 
-    // 💡 LOGIK PETA KEBANGSAAN LEAFLET (STESEN UTAMA, AUKISILIARI & KOTAK CARIAN)
+    // 💡 LOGIK PETA KEBANGSAAN LEAFLET (STESEN UTAMA, AUKISILIARI & CARIAN STESEN TERDEKAT)
     if (text.includes('id="leafletMap"')) {
         setTimeout(() => {
             try {
@@ -449,106 +525,22 @@ function addMessage(text, sender) {
                     { "name": "Stesen Meteorologi Sandakan", "lat": 5.8992, "lng": 118.0664, "state": "sabah" }
                 ];
 
-                // 💡 DAPATKAN TEKS PENGGUNA TERKINI
                 const userMsg = lastUserQuery || "";
                 
                 let mapCenter = [4.2105, 101.9758]; 
                 let zoomLevel = 6; 
 
-                // 💡 FUNGSI PEMBANTU: Pengecaman perkataan penuh sahaja (Kalis substring "sin", "yan", dll)
                 const hasWord = (word) => new RegExp(`\\b${word}\\b`, 'i').test(userMsg);
 
-                // 🗺️ LOGIK PENETAPAN PETA IBU NEGERI & DAERAH SPESIFIK (TENTU LOKASI TEPAT)
-
-                // 1. MERSING (Daerah Khusus Johor)
-                if (hasWord("mersing")) { 
-                    mapCenter = [2.4450, 103.8333]; zoomLevel = 11; 
-                }
-
-                // 2. JOHOR / SENAI / JOHOR BAHRU (Ibu Negeri & Pusat Selatan)
-                else if (hasWord("johor") || userMsg.includes("johor bahru") || hasWord("jb") || hasWord("senai") || hasWord("iskandar puteri") || userMsg.includes("pasir gudang") || hasWord("kulai") || hasWord("pontian") || hasWord("kluang") || userMsg.includes("batu pahat") || hasWord("muar") || hasWord("segamat") || hasWord("tangkak") || userMsg.includes("kota tinggi")) { 
-                    mapCenter = [1.6333, 103.6667]; zoomLevel = 10; // Pusat ke Stesen Senai / JB
-                }
-
-                // 3. JASIN (Daerah Khusus Melaka)
-                else if (hasWord("jasin")) { 
-                    mapCenter = [2.3100, 102.4300]; zoomLevel = 11; 
-                }
-
-                // 4. MELAKA (Ibu Negeri / Bandaraya Melaka)
-                else if (hasWord("melaka") || userMsg.includes("bandaraya melaka") || userMsg.includes("melaka tengah") || userMsg.includes("alor gajah") || userMsg.includes("masjid tanah") || hasWord("merlimau") || userMsg.includes("ayer keroh")) { 
-                    mapCenter = [2.1900, 102.2500]; zoomLevel = 10; // Pusat ke Bandaraya Melaka
-                }
-
-                // 5. PASIR MAS (Daerah Khusus Kelantan)
-                else if (userMsg.includes("pasir mas") || userMsg.includes("pasirmas")) { 
-                    mapCenter = [6.0400, 102.1400]; zoomLevel = 11; 
-                }
-
-                // 6. KELANTAN (Ibu Negeri / Kota Bharu)
-                else if (hasWord("kelantan") || userMsg.includes("kota bharu") || userMsg.includes("kotabharu") || hasWord("tumpat") || hasWord("bachok") || userMsg.includes("pasir puteh") || hasWord("machang") || userMsg.includes("tanah merah") || hasWord("jeli") || userMsg.includes("kuala krai") || userMsg.includes("gua musang") || hasWord("gong kedak")) { 
-                    mapCenter = [6.1250, 102.2400]; zoomLevel = 10; // Pusat ke Kota Bharu
-                }
-
-                // 7. LANGKAWI
-                else if (hasWord("langkawi") || hasWord("kuah") || userMsg.includes("padang matsirat")) { 
-                    mapCenter = [6.3333, 99.7333]; zoomLevel = 11; 
-                }
-
-                // 8. KEDAH (Ibu Negeri / Alor Setar)
-                else if (hasWord("kedah") || userMsg.includes("alor setar") || hasWord("baling") || hasWord("kulim") || userMsg.includes("sungai petani") || userMsg.includes("kubang pasu") || hasWord("jitra") || hasWord("pokok sena") || hasWord("pendang") || hasWord("yan") || hasWord("sik") || userMsg.includes("guar chempedak")) { 
-                    mapCenter = [6.1200, 100.3600]; zoomLevel = 10; // Pusat ke Alor Setar
-                }
-
-                // 9. PERLIS (Ibu Negeri / Kangar)
-                else if (hasWord("perlis") || hasWord("kangar") || hasWord("arau") || userMsg.includes("padang besar") || hasWord("chuping")) { 
-                    mapCenter = [6.4410, 100.1980]; zoomLevel = 10; // Pusat ke Kangar
-                }
-
-                // 10. PULAU PINANG (Ibu Negeri / George Town & Bayan Lepas)
-                else if (hasWord("penang") || userMsg.includes("pulau pinang") || userMsg.includes("george town") || userMsg.includes("georgetown") || userMsg.includes("bayan lepas") || hasWord("butterworth") || userMsg.includes("seberang perai") || userMsg.includes("bukit mertajam")) { 
-                    mapCenter = [5.4140, 100.3290]; zoomLevel = 10; // Pusat ke George Town
-                }
-
-                // 11. PERAK (Ibu Negeri / Ipoh)
-                else if (hasWord("perak") || hasWord("ipoh") || hasWord("taiping") || hasWord("sitiawan") || hasWord("lumut") || hasWord("pangkor") || userMsg.includes("kuala kangsar") || userMsg.includes("teluk intan") || hasWord("tapah") || userMsg.includes("tanjung malim") || hasWord("gerik")) { 
-                    mapCenter = [4.5970, 101.0900]; zoomLevel = 10; // Pusat ke Ipoh
-                }
-
-                // 12. SELANGOR & KUALA LUMPUR / PUTRAJAYA (Ibu Negeri / Shah Alam & KL)
-                else if (hasWord("selangor") || userMsg.includes("shah alam") || hasWord("kl") || userMsg.includes("kuala lumpur") || hasWord("putrajaya") || userMsg.includes("petaling jaya") || hasWord("pj") || hasWord("subang") || hasWord("klang") || hasWord("kajang") || hasWord("sepang") || hasWord("banting") || userMsg.includes("kuala selangor")) { 
-                    mapCenter = [3.0730, 101.5180]; zoomLevel = 10; // Pusat ke Shah Alam
-                }
-
-                // 13. NEGERI SEMBILAN (Ibu Negeri / Seremban)
-                else if (userMsg.includes("negeri sembilan") || hasWord("seremban") || hasWord("nilai") || userMsg.includes("port dickson") || userMsg.includes("kuala pilah") || hasWord("rembau") || hasWord("tampin")) { 
-                    mapCenter = [2.7290, 101.9380]; zoomLevel = 10; // Pusat ke Seremban
-                }
-
-                // 14. PAHANG (Ibu Negeri / Kuantan)
-                else if (hasWord("pahang") || hasWord("kuantan") || hasWord("pekan") || hasWord("rompin") || hasWord("temerloh") || hasWord("bentong") || userMsg.includes("cameron highlands") || hasWord("jerantut") || hasWord("raub")) { 
-                    mapCenter = [3.8080, 103.3260]; zoomLevel = 10; // Pusat ke Kuantan
-                }
-
-                // 15. TERENGGANU (Ibu Negeri / Kuala Terengganu)
-                else if (hasWord("terengganu") || userMsg.includes("kuala terengganu") || hasWord("marang") || hasWord("dungun") || hasWord("kemaman") || hasWord("kerteh") || hasWord("besut")) { 
-                    mapCenter = [5.3300, 103.1400]; zoomLevel = 10; // Pusat ke Kuala Terengganu
-                }
-
-                // 16. LABUAN
-                else if (hasWord("labuan")) { 
-                    mapCenter = [5.3075, 115.2425]; zoomLevel = 11; 
-                }
-
-                // 17. SABAH (Ibu Negeri / Kota Kinabalu)
-                else if (hasWord("sabah") || userMsg.includes("kota kinabalu") || hasWord("kk") || hasWord("sandakan") || hasWord("tawau") || userMsg.includes("lahad datu") || hasWord("semporna") || hasWord("keningau") || hasWord("kudat") || hasWord("ranau")) { 
-                    mapCenter = [5.9800, 116.0700]; zoomLevel = 9; // Pusat ke Kota Kinabalu
-                }
-
-                // 18. SARAWAK (Ibu Negeri / Kuching)
-                else if (hasWord("sarawak") || hasWord("kuching") || hasWord("sibu") || hasWord("miri") || hasWord("bintulu") || hasWord("kapit") || hasWord("limbang") || hasWord("sarikei") || userMsg.includes("sri aman")) { 
-                    mapCenter = [1.5530, 110.3590]; zoomLevel = 9; // Pusat ke Kuching
-                }
+                // Pusat Peta Asal berdasarkan Mesej
+                if (hasWord("mersing")) { mapCenter = [2.4450, 103.8333]; zoomLevel = 11; }
+                else if (hasWord("johor") || userMsg.includes("johor bahru") || hasWord("jb") || hasWord("senai")) { mapCenter = [1.6333, 103.6667]; zoomLevel = 10; }
+                else if (hasWord("jasin")) { mapCenter = [2.3100, 102.4300]; zoomLevel = 11; }
+                else if (hasWord("melaka")) { mapCenter = [2.1900, 102.2500]; zoomLevel = 10; }
+                else if (userMsg.includes("pasir mas") || userMsg.includes("pasirmas")) { mapCenter = [6.0400, 102.1400]; zoomLevel = 11; }
+                else if (hasWord("kelantan") || userMsg.includes("kota bharu")) { mapCenter = [6.1250, 102.2400]; zoomLevel = 10; }
+                else if (hasWord("kedah") || userMsg.includes("alor setar")) { mapCenter = [6.1200, 100.3600]; zoomLevel = 10; }
+                else if (hasWord("selangor") || userMsg.includes("shah alam") || hasWord("kl")) { mapCenter = [3.0730, 101.5180]; zoomLevel = 10; }
 
                 // 1. Bina Peta Leaflet
                 const map = L.map(uniqueMapId).setView(mapCenter, zoomLevel);
@@ -557,7 +549,6 @@ function addMessage(text, sender) {
                     attribution: '© OpenStreetMap'
                 }).addTo(map);
 
-                // Array simpan rujukan semua marker untuk carian
                 const allMarkers = [];
 
                 // 🔵 2. Masukkan Stesen UTAMA (Bulatan Biru)
@@ -567,7 +558,7 @@ function addMessage(text, sender) {
                     }).addTo(map)
                         .bindPopup(`<b>${st.name}</b><br><span style="color:blue;"><b>Kategori: Stesen Utama</b></span><br>Negeri: ${st.state ? st.state.toUpperCase() : 'MALAYSIA'}`);
                     
-                    allMarkers.push({ name: st.name.toLowerCase(), marker: marker, lat: st.lat, lng: st.lng });
+                    allMarkers.push({ name: st.name.toLowerCase(), rawName: st.name, isMain: true, marker: marker, lat: st.lat, lng: st.lng });
                 });
 
                 // 🔴 3. Masukkan Stesen AUKISILIARI (Bulatan Merah)
@@ -577,25 +568,14 @@ function addMessage(text, sender) {
                     }).addTo(map)
                         .bindPopup(`<b>${st.name}</b><br><span style="color:red;"><b>Kategori: Stesen Auksiliari</b></span>`);
                     
-                    allMarkers.push({ name: st.name.toLowerCase(), marker: marker, lat: st.lat, lng: st.lng });
+                    allMarkers.push({ name: st.name.toLowerCase(), rawName: st.name, isMain: false, marker: marker, lat: st.lat, lng: st.lng });
                 });
 
-                // 🔍 4. FUNGSI CARIAN NAMA STESEN DALAM PETA
-                const mapContainer = document.getElementById(uniqueMapId);
-                const searchInput = mapContainer ? mapContainer.parentElement.querySelector('.map-search-input') : null;
-
-                if (searchInput) {
-                    searchInput.addEventListener('input', function () {
-                        const query = this.value.toLowerCase().trim();
-                        if (query.length < 2) return;
-
-                        // Cari stesen pertama yang sepadan
-                        const found = allMarkers.find(item => item.name.includes(query));
-                        if (found) {
-                            map.flyTo([found.lat, found.lng], 12, { duration: 1.2 });
-                            found.marker.openPopup();
-                        }
-                    });
+                // 💡 SIMPAN RUJUKAN PETA KEPADA ELEMEN HTML
+                const mapContainerEl = document.getElementById(uniqueMapId);
+                if (mapContainerEl) {
+                    mapContainerEl._leaflet_map = map;
+                    mapContainerEl._all_markers_data = allMarkers;
                 }
 
                 setTimeout(() => { map.invalidateSize(); }, 100);
@@ -727,10 +707,8 @@ function quickAsk(text, event) {
 // ================================================================
 async function botReply(userMessage) {
     try {
-        // 💡 Padam sebarang jangka masa lama jika ada soalan baru masuk bertubi-tubi
         clearTimeout(followUpTimeout);
 
-        // 🚀 URL BACKEND DISAMBUNGKAN TERUS KE SERVER RENDER!
         const response = await fetch("https://aida-met-kik.onrender.com/chat", {
             method: "POST",
             headers: {
@@ -747,7 +725,6 @@ async function botReply(userMessage) {
 
         addMessage(reply, 'bot');
 
-        // 💡 Masukkan pembilang masa responsif (3 saat) dengan VARIASI AYAT RAWAK
         followUpTimeout = setTimeout(() => {
             const listAyatBM = [
                 'Ada apa-apa lagi maklumat yang boleh saya bantu anda?',
@@ -820,23 +797,19 @@ document.addEventListener('click', function(e) {
 // 5. FUNGSI EKSPORT LOG PERBUALAN (CIRI AUDIT TRAIL KIK DENGAN PASSWORD)
 // ================================================================
 function exportChatLog() {
-    // 🔐 Kata laluan khas pegawai untuk muat turun log
     const ADMIN_PASSWORD = "bukanuser678"; 
 
-    // 1. Minta pengesahan kata laluan daripada pengguna
     const userPrompt = prompt(
         currentLang === 'BM' 
             ? "Sila masukkan kata laluan:" 
             : "Please enter password:"
     );
 
-    // 2. Jika pengguna tekan 'Cancel' atau tidak taip apa-apa
     if (userPrompt === null || userPrompt.trim() === "") {
         alert(currentLang === 'BM' ? "Akses dibatalkan." : "Access cancelled.");
         return;
     }
 
-    // 3. Semak jika kata laluan salah
     if (userPrompt !== ADMIN_PASSWORD) {
         alert(
             currentLang === 'BM' 
@@ -846,14 +819,12 @@ function exportChatLog() {
         return;
     }
 
-    // 4. Semak jika ada log tersimpan
     const logs = JSON.parse(localStorage.getItem('chatLogs'));
     if (!logs || logs.length === 0) {
         alert(currentLang === 'BM' ? 'Tiada rekod perbualan untuk diekstrak.' : 'No chat records to extract.');
         return;
     }
 
-    // 5. Jika kata laluan BETUL, teruskan eksport log perbualan
     let textContent = "==================================================\n";
     textContent += "    AIDA MET MALAYSIA - CHATBOX AUDIT TRAIL LOG   \n";
     textContent += `    Tarikh Eksport: ${new Date().toLocaleString()} \n`;

@@ -600,16 +600,54 @@ function addMessage(text, sender) {
                 let zoomLevel = 6; 
 
                 const hasWord = (word) => new RegExp(`\\b${word}\\b`, 'i').test(userMsg);
-
+				
+				// 🗺️ LOGIK PENETAPAN PETA IBU NEGERI & DAERAH (DISUSUN LENGKAP 14 NEGERI)
+                // 1. JOHOR & MERSING
                 if (hasWord("mersing")) { mapCenter = [2.4450, 103.8333]; zoomLevel = 11; }
                 else if (hasWord("johor") || userMsg.includes("johor bahru") || hasWord("jb") || hasWord("senai")) { mapCenter = [1.6333, 103.6667]; zoomLevel = 10; }
-                else if (hasWord("jasin")) { mapCenter = [2.3100, 102.4300]; zoomLevel = 11; }
-                else if (hasWord("melaka")) { mapCenter = [2.1900, 102.2500]; zoomLevel = 10; }
-                else if (userMsg.includes("pasir mas") || userMsg.includes("pasirmas")) { mapCenter = [6.0400, 102.1400]; zoomLevel = 11; }
-                else if (hasWord("kelantan") || userMsg.includes("kota bharu")) { mapCenter = [6.1250, 102.2400]; zoomLevel = 10; }
-                else if (hasWord("kedah") || userMsg.includes("alor setar")) { mapCenter = [6.1200, 100.3600]; zoomLevel = 10; }
-                else if (hasWord("selangor") || userMsg.includes("shah alam") || hasWord("kl")) { mapCenter = [3.0730, 101.5180]; zoomLevel = 10; }
 
+                // 2. MELAKA & JASIN
+                else if (hasWord("jasin")) { mapCenter = [2.3100, 102.4300]; zoomLevel = 11; }
+                else if (hasWord("melaka") || userMsg.includes("bandaraya melaka") || userMsg.includes("melaka tengah")) { mapCenter = [2.1900, 102.2500]; zoomLevel = 10; }
+
+                // 3. KELANTAN & PASIR MAS
+                else if (userMsg.includes("pasir mas") || userMsg.includes("pasirmas")) { mapCenter = [6.0400, 102.1400]; zoomLevel = 11; }
+                else if (hasWord("kelantan") || userMsg.includes("kota bharu") || userMsg.includes("kotabharu")) { mapCenter = [6.1250, 102.2400]; zoomLevel = 10; }
+
+                // 4. KEDAH & LANGKAWI
+                else if (hasWord("langkawi")) { mapCenter = [6.3333, 99.7333]; zoomLevel = 11; }
+                else if (hasWord("kedah") || userMsg.includes("alor setar")) { mapCenter = [6.1200, 100.3600]; zoomLevel = 10; }
+
+                // 5. PERLIS (Kangar)
+                else if (hasWord("perlis") || hasWord("kangar") || hasWord("arau") || userMsg.includes("padang besar") || hasWord("chuping")) { mapCenter = [6.4410, 100.1980]; zoomLevel = 10; }
+
+                // 6. PULAU PINANG / PENANG (George Town / Bayan Lepas)
+                else if (hasWord("penang") || userMsg.includes("pulau pinang") || userMsg.includes("george town") || userMsg.includes("georgetown") || userMsg.includes("bayan lepas") || hasWord("seberang perai") || hasWord("butterworth")) { mapCenter = [5.4140, 100.3290]; zoomLevel = 10; }
+
+                // 7. PERAK (Ipoh)
+                else if (hasWord("perak") || hasWord("ipoh") || hasWord("taiping") || hasWord("sitiawan") || hasWord("lumut") || hasWord("pangkor") || userMsg.includes("kuala kangsar") || userMsg.includes("teluk intan")) { mapCenter = [4.5970, 101.0900]; zoomLevel = 10; }
+
+                // 8. SELANGOR & KUALA LUMPUR / PUTRAJAYA (Shah Alam & KL)
+                else if (hasWord("selangor") || userMsg.includes("shah alam") || hasWord("kl") || userMsg.includes("kuala lumpur") || userMsg.includes("putrajaya") || userMsg.includes("petaling jaya") || hasWord("subang") || hasWord("klang")) { mapCenter = [3.0730, 101.5180]; zoomLevel = 10; }
+
+                // 9. NEGERI SEMBILAN (Seremban)
+                else if (userMsg.includes("negeri sembilan") || hasWord("seremban") || hasWord("nilai") || userMsg.includes("port dickson") || userMsg.includes("kuala pilah") || hasWord("rembau") || hasWord("tampin")) { mapCenter = [2.7290, 101.9380]; zoomLevel = 10; }
+
+                // 10. PAHANG (Kuantan)
+                else if (hasWord("pahang") || hasWord("kuantan") || hasWord("pekan") || hasWord("rompin") || hasWord("temerloh") || hasWord("bentong") || userMsg.includes("cameron highlands")) { mapCenter = [3.8080, 103.3260]; zoomLevel = 10; }
+
+                // 11. TERENGGANU (Kuala Terengganu)
+                else if (hasWord("terengganu") || userMsg.includes("kuala terengganu") || hasWord("marang") || hasWord("dungun") || hasWord("kemaman") || hasWord("kerteh") || hasWord("besut")) { mapCenter = [5.3300, 103.1400]; zoomLevel = 10; }
+
+                // 12. LABUAN
+                else if (hasWord("labuan")) { mapCenter = [5.3075, 115.2425]; zoomLevel = 11; }
+
+                // 13. SABAH (Kota Kinabalu)
+                else if (hasWord("sabah") || userMsg.includes("kota kinabalu") || hasWord("kk") || hasWord("sandakan") || hasWord("tawau") || userMsg.includes("lahad datu") || hasWord("semporna") || hasWord("keningau")) { mapCenter = [5.9800, 116.0700]; zoomLevel = 9; }
+
+                // 14. SARAWAK (Kuching)
+                else if (hasWord("sarawak") || hasWord("kuching") || hasWord("sibu") || hasWord("miri") || hasWord("bintulu") || hasWord("kapit") || hasWord("limbang")) { mapCenter = [1.5530, 110.3590]; zoomLevel = 9; }
+               
                 const map = L.map(uniqueMapId).setView(mapCenter, zoomLevel);
 
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

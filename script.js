@@ -604,7 +604,7 @@ function addMessage(text, sender) {
 				// 🗺️ LOGIK PENETAPAN PETA IBU NEGERI & DAERAH (DISUSUN LENGKAP 14 NEGERI)
                 // 1. JOHOR & MERSING
                 if (hasWord("mersing")) { mapCenter = [2.4450, 103.8333]; zoomLevel = 11; }
-                else if (hasWord("johor") || userMsg.includes("johor bahru") || hasWord("jb") || hasWord("senai")) { mapCenter = [1.4927, 103.7414]; zoomLevel = 11; }
+                else if (hasWord("johor") || userMsg.includes("johor bahru") || hasWord("jb") || hasWord("senai")) { mapCenter = [1.4927, 103.7414]; zoomLevel = 9; }
 
                 // 2. MELAKA & JASIN
                 else if (hasWord("jasin")) { mapCenter = [2.3100, 102.4300]; zoomLevel = 11; }

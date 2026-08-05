@@ -158,17 +158,32 @@ app.post("/chat", async (req, res) => {
     const lang = req.body.lang || "BM"; 
     const lowerMsg = userMsg.toLowerCase().trim();
     const isEnglish = (String(lang).toUpperCase() === 'EN');
-// 💡 1. PENANGANAN JAWAPAN PENUTUP / TIADA SOALAN LAGI (LENGKAP DENGAN FRASA RAPAT)
+	
+// 💡 1. PENANGANAN JAWAPAN PENUTUP / TIADA SOALAN LAGI
     const exitKeywordsBM = [
-        'tiada', 'takda', 'takde', 'tidak', 'terima kasih', 'tq', 'takdak', 'terimakasih', 'terima kasih membantu', 'ok tq', 'ok terima kasih', 'ok tqvm', 'bye' , 'okay tq', 'okay terima kasih', 'okay tqvm',
+        'tiada', 'takda', 'takde', 'tidak', 'terima kasih', 'tq', 'takdak', 
+        'terimakasih', 'terima kasih membantu', 'ok tq', 'ok terima kasih', 
+        'ok tqvm', 'bye', 'okay tq', 'okay terima kasih', 'okay tqvm'
     ];
     const exitKeywordsEN = [
-        'no', 'nope', 'nothing', 'no thanks', 'no thank you', 'thank you', 'thanks', 'thankyou', 'ok thankyou', 'okay thankyou', 'ok thanks', 'bye', 'goodbye' , 'okay thank you', 'okay thank you', 'okay thanks',
+        'no', 'nope', 'nothing', 'no thanks', 'no thank you', 'thank you', 
+        'thanks', 'thankyou', 'ok thankyou', 'okay thankyou', 'ok thanks', 
+        'bye', 'goodbye', 'okay thank you', 'okay thanks'
     ];
 
+    // Gantikan includes() dengan padanan Word Boundary (\b) untuk elak salah dikesan dalam perkataan lain (cth: "know" / "status")
+    const checkExit = (keywords, msg) => {
+        return keywords.some(k => {
+            const cleanK = k.toLowerCase().trim();
+            if (msg === cleanK || msg === cleanK + '.') return true;
+            const pattern = new RegExp(`\\b${cleanK.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+            return pattern.test(msg);
+        });
+    };
+
     const isExitIntent = isEnglish 
-        ? exitKeywordsEN.some(k => lowerMsg.includes(k))
-        : exitKeywordsBM.some(k => lowerMsg.includes(k));
+        ? checkExit(exitKeywordsEN, lowerMsg)
+        : checkExit(exitKeywordsBM, lowerMsg);
 
     if (isExitIntent) {
         const exitReplyBM = "Sama-sama! Terima kasih kerana menggunakan perkhidmatan AIDA MET Malaysia. Semoga hari anda menyenangkan! 😊";

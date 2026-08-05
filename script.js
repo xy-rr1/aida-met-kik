@@ -498,15 +498,22 @@ function sendMessage() {
         return;
     }
 
-    const lowerMessage = message.toLowerCase();
-    const englishKeywords = ['what', 'how', 'why', 'who', 'where', 'is', 'are', 'rain', 'weather', 'buy', 'purchase', 'data', 'price', 'fee', 'waiver', 'student', 'document'];
+	const lowerMessage = message.toLowerCase();
     
-    const isEnglish = englishKeywords.some(word => lowerMessage.includes(word));
+    // 1. Senarai kata kunci Bahasa Inggeris (ditambah kata penutup & penegasan)
+    const englishKeywords = [
+        'what', 'how', 'why', 'who', 'where', 'is', 'are', 'rain', 'weather', 
+        'buy', 'purchase', 'data', 'price', 'fee', 'waiver', 'student', 'document',
+        'no', 'thanks', 'thankyou', 'thank', 'yes', 'okay', 'bye', 'address', 'hours'
+    ];
+    
+    // 2. Semak jika ada perkataan Inggeris dalam mesej
+    const isEnglish = englishKeywords.some(word => new RegExp(`\\b${word}\\b`, 'i').test(lowerMessage));
 
+    // 3. Hanya kemaskini bahasa jika perkataan Inggeris ditemui
+    // JIKALAU TIADA, kekalkan nilai currentLang yang sedia ada (jangan paksa reset ke BM)
     if (isEnglish) {
         currentLang = 'EN';
-    } else {
-        currentLang = 'BM'; 
     }
     
     setTimeout(() => botReply(message), 600);

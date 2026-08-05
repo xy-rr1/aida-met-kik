@@ -158,18 +158,21 @@ app.post("/chat", async (req, res) => {
     const lang = req.body.lang || "BM"; 
     const lowerMsg = userMsg.toLowerCase().trim();
     const isEnglish = (String(lang).toUpperCase() === 'EN');
-
-    // 💡 1. PENANGANAN JAWAPAN PENUTUP / TIADA SOALAN LAGI (No, Tiada, Tak ada, Thanks, Bye)
-    const exitKeywordsBM = ['tiada', 'tak ada', 'takde', 'tidak', 'terima kasih', 'tq', 'terima kasih membantu', 'ok tq', 'bye'];
-    const exitKeywordsEN = ['no', 'nope', 'nothing', 'no thanks', 'no thank you', 'thank you', 'thanks', 'bye', 'goodbye'];
+// 💡 1. PENANGANAN JAWAPAN PENUTUP / TIADA SOALAN LAGI (LENGKAP DENGAN FRASA RAPAT)
+    const exitKeywordsBM = [
+        'tiada', 'takda', 'takde', 'tidak', 'terima kasih', 'tq', 'takdak', 'terimakasih', 'terima kasih membantu', 'ok tq', 'ok terima kasih', 'ok tqvm', 'bye' , 'okay tq', 'okay terima kasih', 'okay tqvm',
+    ];
+    const exitKeywordsEN = [
+        'no', 'nope', 'nothing', 'no thanks', 'no thank you', 'thank you', 'thanks', 'thankyou', 'ok thankyou', 'okay thankyou', 'ok thanks', 'bye', 'goodbye' , 'okay thank you', 'okay thank you', 'okay thanks',
+    ];
 
     const isExitIntent = isEnglish 
-        ? exitKeywordsEN.some(k => lowerMsg === k || lowerMsg === k + '.')
-        : exitKeywordsBM.some(k => lowerMsg === k || lowerMsg === k + '.');
+        ? exitKeywordsEN.some(k => lowerMsg.includes(k))
+        : exitKeywordsBM.some(k => lowerMsg.includes(k));
 
     if (isExitIntent) {
-        const exitReplyBM = "Terima kasih kerana menggunakan perkhidmatan AIDA MET Malaysia. 😊";
-        const exitReplyEN = "Thank you for using AIDA MET Malaysia services. Have a wonderful day ahead! 😊";
+        const exitReplyBM = "Sama-sama! Terima kasih kerana menggunakan perkhidmatan AIDA MET Malaysia. Semoga hari anda menyenangkan! 😊";
+        const exitReplyEN = "You're most welcome! Thank you for using AIDA MET Malaysia services. Have a wonderful day ahead! 😊";
         return res.json({ reply: isEnglish ? exitReplyEN : exitReplyBM, source: "system" });
     }
 

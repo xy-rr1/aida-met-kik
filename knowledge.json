@@ -130,7 +130,7 @@
     }
   },
   "pembelian_data_mymetdata": {
-    "cara_beli": "Pengguna boleh membeli atau memohon data meteorologi/hujan secara dalam talian melalui Portal MyMETData di pautan rasmi <a href=\"https://mymetdata.met.gov.my\" target=\"_blank\" class=\"chat-link\">mymetdata.met.gov.my</a>.",
-    "how_to_buy": "Users can purchase or request meteorological/rainfall data online via the official MyMETData Portal link at <a href=\"https://mymetdata.met.gov.my\" target=\"_blank\" class=\"chat-link\">mymetdata.met.gov.my</a>."
+    "cara_beli": "Pengguna boleh membeli atau memohon data meteorologi/hujan secara dalam talian melalui Portal MyMETData di pautan rasmi <a href=\"https://mymetdata.met.gov.my/guideline\" target=\"_blank\" class=\"chat-link\">mymetdata.met.gov.my/guideline</a>.",
+    "how_to_buy": "Users can purchase or request meteorological/rainfall data online via the official MyMETData Portal link at <a href=\"https://mymetdata.met.gov.my/guideline\" target=\"_blank\" class=\"chat-link\">mymetdata.met.gov.my/guideline</a>."
   }
 }

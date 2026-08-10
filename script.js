@@ -505,7 +505,8 @@ function showFaqOptions(lang) {
     
     if (lang === 'BM') {
         div.innerHTML = `
-            <button class="lang-btn" onclick="quickAsk('Stesen cuaca', event)" style="background-color: #0056b3; color: #ffffff; font-weight: bold;">📍 Carian Peta Stesen</button>
+			<button class="lang-btn" onclick="quickAsk('Pegawai bertugas', event)">📞 Hubungi Pegawai</button>
+            <button class="lang-btn" onclick="quickAsk('Stesen cuaca', event)">📍 Carian Peta Stesen</button>
             <button class="lang-btn" onclick="quickAsk('Panduan sistem & Laman web', event)">Panduan Laman Web</button>
             <button class="lang-btn" onclick="quickAsk('Waktu operasi', event)">Waktu Operasi</button>
             <button class="lang-btn" onclick="quickAsk('Alamat jabatan', event)">Alamat Jabatan</button>
@@ -516,11 +517,11 @@ function showFaqOptions(lang) {
             <button class="lang-btn" onclick="quickAsk('Jenis format data', event)">Jenis & Format Data</button>
             <button class="lang-btn" onclick="quickAsk('Pengecualian yuran & Diskaun pelajar', event)">Pengecualian Fi Pelajar</button>
             <button class="lang-btn" onclick="quickAsk('Prosedur & Dokumen sokongan', event)">Prosedur & Dokumen</button>
-            <button class="lang-btn" onclick="quickAsk('Pegawai bertugas', event)">📞 Hubungi Pegawai</button>
         `;
     } else {
         div.innerHTML = `
-            <button class="lang-btn" onclick="quickAsk('Weather station', event)" style="background-color: #0056b3; color: #ffffff; font-weight: bold;">📍 Interactive Station Map</button>
+			<button class="lang-btn" onclick="quickAsk('Officer in charge', event)">📞 Contact Officer</button>
+            <button class="lang-btn" onclick="quickAsk('Weather station', event)">📍 Interactive Station Map</button>
             <button class="lang-btn" onclick="quickAsk('Website guide', event)">Website Guide</button>
             <button class="lang-btn" onclick="quickAsk('Operating hours', event)">Operating Hours</button>
             <button class="lang-btn" onclick="quickAsk('Department address', event)">Department address</button>
@@ -531,7 +532,6 @@ function showFaqOptions(lang) {
             <button class="lang-btn" onclick="quickAsk('Data format', event)">Data Types & Format</button>
             <button class="lang-btn" onclick="quickAsk('Fee waivers & Student discount', event)">Student Fee Waiver</button>
             <button class="lang-btn" onclick="quickAsk('Procedures & Required documents', event)">Documents Required</button>
-            <button class="lang-btn" onclick="quickAsk('Officer in charge', event)">📞 Contact Officer</button>
         `;
     }    
     

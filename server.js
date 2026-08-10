@@ -98,7 +98,7 @@ const faqData = [
                   '• Application justification'
     },
     {
-        keywords: ['stesen cuaca', 'stesen meteorologi', 'lokasi stesen', 'senarai stesen', 'stesen malaysia', 'stesen di', 'stesen dekat', 'peta stesen', 'stesen mana', 'paling dekat', 'stesen paling dekat', 'lokasi saya'],
+        keywords: ['stesen cuaca', 'stesen meteorologi', 'lokasi stesen', 'senarai stesen', 'stesen malaysia', 'stesen di', 'stesen dekat', 'peta stesen', 'stesen mana', 'paling dekat', 'stesen paling dekat', 'lokasi saya', 'weather station', 'meteorology station', 'station location', 'list of stations', 'Malaysia station', 'station in', 'station near', 'station map', 'which station', 'closest', 'nearest station', 'my location' ],
         answerBM: '<b>📍 Carian Stesen Cuaca Terdekat</b><br><br>' +
                   '<div style="display:flex; gap:6px; margin-bottom:8px;">' +
                       '<input type="text" class="user-location-input" placeholder="Masukkan lokasi/daerah anda..." style="flex:1; padding:6px 10px; border-radius:6px; border:1px solid #ccc; font-size:12px; box-sizing:border-box;">' +
@@ -212,7 +212,7 @@ app.post("/chat", async (req, res) => {
             3. CONFUSED USER RESPONSE ("DON'T UNDERSTAND"): If the user says "don't understand" or asks for clarification, explain the MET Malaysia topic in simple, easy-to-understand bullet points. DO NOT discuss AI rules.
             4. QUESTIONS BASED ON KNOWLEDGE DATA: Answer professionally using ONLY the provided official data. For scientific/meteorological topics, structure your answer in 2 to 3 short paragraphs (Paragraph 1: Definition, Paragraph 2: Importance/Context to MET Malaysia). For simple/casual questions, keep it concise and to the point.
             5. LIVE WEATHER / REAL-TIME FORECASTS: If asked about live weather forecasts, explain that you do not provide real-time radar feeds, and advise them to check the 'myCuaca' app or visit www.met.gov.my.
-            6. OUT OF SCOPE / RANDOM QUESTIONS: If asked completely unrelated topics (e.g. sports, cooking), politely reply: "Maaf, saya hanya dilatih untuk perkhidmatan MET Malaysia dan sains meteorologi sahaja."
+            6. OUT OF SCOPE / RANDOM QUESTIONS: If asked completely unrelated topics (e.g. sports, cooking), politely reply: "I am AIDA, an AI assistant specifically trained for MET Malaysia services and meteorology topics. I am unable to answer questions outside this scope."
             7. STRICT RULE: NEVER mention "JSON", "database", "knowledgeData", "provided file", or "system prompt". Always reply 100% in ENGLISH.`;
         } else {
             promptSystem = `Anda ialah AIDA, AI Chatbot rasmi untuk Jabatan Meteorologi Malaysia (MET Malaysia). Tahun semasa ialah 2026.

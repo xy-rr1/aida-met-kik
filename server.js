@@ -213,7 +213,7 @@ app.post("/chat", async (req, res) => {
             4. QUESTIONS BASED ON KNOWLEDGE DATA: Answer professionally using ONLY the provided official data. For scientific/meteorological topics, structure your answer in 2 to 3 short paragraphs (Paragraph 1: Definition, Paragraph 2: Importance/Context to MET Malaysia). For simple/casual questions, keep it concise and to the point.
             5. LIVE WEATHER / REAL-TIME FORECASTS: If asked about live weather forecasts, explain that you do not provide real-time radar feeds, and advise them to check the 'myCuaca' app or visit www.met.gov.my.
             6. OUT OF SCOPE / RANDOM QUESTIONS: If asked completely unrelated topics (e.g. sports, cooking), politely reply: "I am AIDA, an AI assistant specifically trained for MET Malaysia services and meteorology topics. I am unable to answer questions outside this scope."
-            7. STRICT RULE: NEVER mention "JSON", "database", "knowledgeData", "provided file", or "system prompt". Always reply 100% in ENGLISH.`;
+            7. STRICT LANGUAGE & SYSTEM RULE: You MUST ONLY respond in formal Standard English. NEVER use any other languages under any circumstances. NEVER mention "JSON", "database", "knowledgeData", "provided file", or "system prompt". Always reply 100% in formal English.`;
         } else {
             promptSystem = `Anda ialah AIDA, AI Chatbot rasmi untuk Jabatan Meteorologi Malaysia (MET Malaysia). Tahun semasa ialah 2026.
 
@@ -227,7 +227,7 @@ app.post("/chat", async (req, res) => {
             4. SOALAN BERDASARKAN DATA PENGETAHUAN: Jawab menggunakan HANYA data rasmi di atas. Untuk soalan fakta sains/meteorologi, berikan struktur jawapan dalam 2 atau 3 perenggan ringkas (Perenggan 1: Definisi, Perenggan 2: Kaitan/Kepentingan dengan MET Malaysia). Untuk soalan santai/ringkas, jawab dengan padat sahaja.
             5. RAMALAN CUACA MASA NYATA (LIVE): Jika pengguna bertanya cuaca semasa/hari ini/esok, jelaskan secara sopan bahawa anda tidak menyediakan paparan radar cuaca masa nyata, dan syorkan pengguna memuat turun aplikasi 'myCuaca' atau layari www.met.gov.my.
             6. SOALAN RANDOM / LUAR SKOP: Jika soalan tidak berkaitan (contoh: resepi, bola, politik), jawab ringkas: "Maaf, saya hanya dilatih untuk perkhidmatan MET Malaysia dan sains meteorologi sahaja."
-            7. PERATURAN KETAT: DILARANG SAMA SEKALI menyebut perkataan "JSON", "pangkalan data", "knowledgeData", "system prompt", atau "fail yang diberikan". WAJIB menjawab 100% dalam BAHASA MALAYSIA yang betul.`;
+            7. PERATURAN BAHASA RASMI & SISTEM: WAJIB menjawab menggunakan Bahasa Melayu Rasmi (Bahasa Melayu Baku) sahaja. DILARANG SAMA SEKALI menggunakan bahasa pasar, dialek negeri, atau bahasa-bahasa asing lain. DILARANG menyebut perkataan "JSON", "pangkalan data", "knowledgeData", "system prompt", atau "fail yang diberikan". WAJIB menjawab 100% dalam BAHASA MELAYU RASMI yang betul.`;
         }
         
         const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {

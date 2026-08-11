@@ -21,8 +21,8 @@ const knowledgeData = require("./knowledge.json");
 const faqData = [
     {
         keywords: ['navigasi', 'panduan laman', 'fungsi website', 'browse', 'navigate', 'panduan sistem & website', 'panduan sistem & laman web', 'website navigation guide', 'website guide'],
-        answerBM: 'Untuk menggunakan website ini, sila rujuk menu utama di bahagian atas laman.',
-        answerEN: 'To use this website, please refer to the main menu at the top of the page.'
+        answerBM: 'Untuk menggunakan laman sesawang ini, sila rujuk menu Tatacara di bahagian laman utama.<a href="https://mymetdata.met.gov.my/guideline" target="_blank" class="chat-link">mymetdata.met.gov.my/guideline</a>',
+        answerEN: 'To use this website, please refer to the Procedures menu on the homepage. <a href="https://mymetdata.met.gov.my/guideline" target="_blank" class="chat-link">mymetdata.met.gov.my/guideline</a>'
     },
     {
         keywords: ['waktu operasi', 'waktu pejabat', 'pejabat buka', 'operating hours', 'office hours', 'jam berapa buka', 'waktu kaunter'],

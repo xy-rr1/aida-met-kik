@@ -20,7 +20,7 @@ const knowledgeData = require("./knowledge.json");
    ================================================================ */
 const faqData = [
     {
-        keywords: ['navigasi', 'panduan laman', 'fungsi website', 'browse', 'navigate', 'panduan sistem & website', 'panduan sistem & laman web', 'website navigation guide', 'website guide'],
+        keywords: ['navigasi', 'panduan laman sesawang', 'fungsi website', 'browse', 'navigate', 'panduan sistem & website', 'panduan sistem & laman web', 'website navigation guide', 'website guide', 'guideline' , 'tatacara', 'guna' , 'laman sesawang'],
         answerBM: 'Untuk menggunakan laman sesawang ini, sila rujuk menu Tatacara di bahagian laman utama.<a href="https://mymetdata.met.gov.my/guideline" target="_blank" class="chat-link">mymetdata.met.gov.my/guideline</a>',
         answerEN: 'To use this website, please refer to the Procedures menu on the homepage. <a href="https://mymetdata.met.gov.my/guideline" target="_blank" class="chat-link">mymetdata.met.gov.my/guideline</a>'
     },
@@ -65,7 +65,7 @@ const faqData = [
         answerEN: 'In general, a fee waiver may be granted to Government Agencies / researchers or students who are citizens. Kindly register at <a href="https://mymetdata.met.gov.my" target="_blank" class="chat-link">mymetdata.met.gov.my</a> and state \'waiver/exemption\'.'
     },
     {
-        keywords: ['dokumen sokongan', 'dokumen pengecualian', 'surat sokongan', 'kad pelajar', 'required documents', 'prosedur & dokumen sokongan', 'procedures & required documents', 'dokumen'],
+        keywords: ['dokumen sokongan', 'dokumen pengecualian', 'surat sokongan', 'kad pelajar', 'required documents', 'prosedur & dokumen sokongan', 'procedures & required documents', 'document'],
         answerBM: '<b>Dokumen Sokongan Mengikut Kategori Pemohon:</b><br><br>' +
                   '<b>1. Pelajar (Sekolah Rendah & Menengah):</b><br>' +
                   '• Surat sokongan sekolah<br>' +
